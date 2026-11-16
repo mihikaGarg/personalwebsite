@@ -239,13 +239,11 @@ window.SITE = {
     { src: P("me-ftc.jpg"), caption: "" },
     { src: P("ocean-trees-2.jpg"), caption: "" },
     { src: P("dog-selfie.jpg"), caption: "" },
-    { src: P("me-beach-sunset.jpg"), caption: "" },
     { src: P("waterfall-jungle.jpg"), caption: "" },
     { src: P("beach-sunset.jpg"), caption: "" },
     { src: P("friends-group.jpg"), caption: "" },
     { src: P("ski-board.jpg"), caption: "" },
     { src: P("friend-beach.jpg"), caption: "" },
-    { src: P("drink-lattes.jpg"), caption: "" },
   ],
 
   contact: {
