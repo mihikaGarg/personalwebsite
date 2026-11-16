@@ -592,7 +592,7 @@
 
 
     /* ---------- camera roll ---------- */
-    .camroll { position: relative; height: 290px; margin: 110px 0 70px; }
+    .camroll { position: relative; height: 290px; margin: 110px 0 10px; }
     .camera { position: absolute; left: 0; top: 60px; width: 230px; z-index: 3; background: none; border: 0; padding: 0; cursor: pointer;
       transition: transform .25s cubic-bezier(.3, 1.6, .5, 1); filter: drop-shadow(6px 8px 0 rgba(59, 68, 96, .12)); }
     .camera:hover { transform: rotate(-3deg) scale(1.03); }
@@ -867,7 +867,6 @@
           <svg viewBox="0 0 60 40"><path d="M4 8c18-6 34 4 40 22M36 24l8 8 4-11" /></svg></span>
         <div class="film" aria-label="All my photos, rolling by"><div class="film-track" id="filmTrack"></div></div>
       </div>
-      <div class="masonry" id="masonry"></div>
     </div>
   </section>
 
@@ -931,7 +930,7 @@
     </div>
   </div>
 
-  <script src="content.js?v=20261116m"></script>
+  <script src="content.js?v=20261116n"></script>
   <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
   <script>
     const S = window.SITE;
@@ -1072,6 +1071,7 @@
     const PHOTO_RATIO = {"beach-horses":0.75,"beach-sunset":1.333,"beach-surfboard":1.333,"city-skyline":1.333,"coffee-bagel":0.75,"concert-2":1.333,"concert":1.778,"dog-1":1.333,"dog-3":1.333,"dog-me":1.333,"dog-selfie":1.778,"dog-window":1.333,"drink-lattes":1.333,"drink-matcha-2":1.333,"drink-matcha":1.333,"ferry-sunset":1.333,"friend-beach":0.75,"friend-berkeley":1.501,"friend-brunch":1.333,"friend-dorm":1.333,"friend-marina":1.333,"friends-balloons":0.75,"friends-formal":1.501,"friends-group":1.501,"me-balloons":1.333,"me-beach-sunset":1.333,"me-ftc":0.75,"me-jungle":1.333,"me-trees":1.501,"me-waterfall":1.501,"ocean-trees-2":1.333,"ocean-trees":0.75,"palm-beach":0.75,"ski-blue-sky":1.333,"ski-board":1.333,"ski-chairlift":1.778,"ski-friends":1.333,"ski-lift-trees":1.333,"ski-slope":1.333,"sticker-stand":1.333,"tahoe-lake":1.778,"tahoe-walk":1.333,"waterfall-jungle":1.333};
     let galleryCols = 0;
     function renderGallery(revealed) {
+      if (!$("masonry")) return;
       const n = innerWidth >= 1000 ? 4 : innerWidth >= 700 ? 3 : 2;
       if (n === galleryCols) return;
       galleryCols = n;
@@ -1275,9 +1275,21 @@
     /* ================= camera roll ================= */
     const film = $("filmTrack");
     // the film strip shows every photo on the site (camera roll + all the hobby popups), no repeats
-    const seen = new Set();
-    const ROLL = [...S.gallery, ...S.hobbies.flatMap((x) => x.photos || []), { src: S.about.photo }]
-      .filter((p) => p && p.src && !seen.has(p.src) && seen.add(p.src));
+    // mixed up so it never shows a run of the same thing (4 skiing pics in a row, etc.):
+    // group photos by hobby, then deal them out one group at a time
+    const seen = new Set(), groups = new Map();
+    const addTo = (key, p) => { if (!p || !p.src || seen.has(p.src)) return; seen.add(p.src); if (!groups.has(key)) groups.set(key, []); groups.get(key).push(p); };
+    S.hobbies.forEach((x) => (x.photos || []).forEach((p) => addTo(x.title, p)));
+    [...S.gallery, { src: S.about.photo }].forEach((p) => addTo("other", p));
+    // always take from the biggest pile that isn't the one we just used
+    const piles = [...groups.entries()].map(([k, v]) => ({ k, v }));
+    const ROLL = [];
+    let last = null;
+    while (piles.some((p) => p.v.length)) {
+      const pick = piles.filter((p) => p.v.length && p.k !== last).sort((a, b) => b.v.length - a.v.length)[0]
+        || piles.find((p) => p.v.length);
+      ROLL.push(pick.v.shift()); last = pick.k;
+    }
     const rollFrames = ROLL.map((g, i) => `<button data-roll="${i}" aria-label="Open photo"><img src="${esc(g.src)}" alt="" loading="lazy"></button>`).join("");
     film.innerHTML = rollFrames + rollFrames;   // twice, so the loop is seamless
     film.style.setProperty("--dur", ROLL.length * 4 + "s");
