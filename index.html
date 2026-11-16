@@ -7,7 +7,7 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🩵</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..700,0..100,0..1&display=swap" rel="stylesheet" />
   <style>
     :root {
       --sky: #eaf3ff;
@@ -575,9 +575,141 @@
       .reveal, .hero h1 .w, .hero-text .caps, .hero-sub, .walk-cta { opacity: 1 !important; transform: none !important; }
       html { scroll-behavior: auto; }
     }
+
+    /* =====================================================================
+       VINTAGE WATERCOLOR THEME — cream paper, soft washes, ink lines.
+       (Delete this whole block to go back to the pastel blue look.)
+       ===================================================================== */
+    :root {
+      --sky: #f5eedd;
+      --paper: #fbf6ea;
+      --ink: #34394a;
+      --cream: #34394a;
+      --cream-soft: rgba(52, 57, 74, .72);
+      --gold: #5f86b5;          /* watercolor blue for italic accents */
+      --rose: #d9938a;
+      --butter: #ecc874;
+      --sky-wash: #9dbbdc;
+      --sage-wash: #a9c2a0;
+      --sage: #7d8f9e;
+      --line: rgba(52, 57, 74, .22);
+      --sans: "EB Garamond", Georgia, serif;
+      --hand-box: 18px 6px 16px 8px / 8px 16px 6px 18px;   /* wobbly, hand-inked corners */
+    }
+    body { font-size: 19px; line-height: 1.6; color: var(--ink); }
+    h1, h2, h3 { font-variation-settings: "SOFT" 100, "WONK" 1; }
+    em { color: var(--gold); }
+    .caps { font-family: var(--sans); font-weight: 500; letter-spacing: .26em; font-size: 13px; }
+
+    /* paper grain over everything */
+    body::before {
+      content: ""; position: fixed; inset: 0; z-index: 45; pointer-events: none; opacity: .35; mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .38 0 0 0 0 .28 0 0 0 .22 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    /* soft warm vignette, like an old printed page */
+    body::after {
+      content: ""; position: fixed; inset: 0; z-index: 44; pointer-events: none;
+      background: radial-gradient(120% 90% at 50% 40%, transparent 60%, rgba(160, 120, 70, .10));
+    }
+
+    /* photos look like faded prints */
+    .tile > img, .shot img, .booth-card img, .polaroid img, .contact-photo img, .strip img, .np-cover, .np-label {
+      filter: saturate(.8) sepia(.16) contrast(.94) brightness(1.03);
+    }
+    /* background photos look painted */
+    .scene-bg { filter: saturate(.62) sepia(.22) brightness(1.08) contrast(.86) blur(1.2px); }
+    .scene-bg::after { background: linear-gradient(var(--sky) 0%, rgba(245, 238, 221, .58) 22%, rgba(245, 238, 221, .58) 78%, var(--sky) 100%); }
+    .contact .scene-bg::after { background: linear-gradient(var(--sky) 0%, rgba(245, 238, 221, .62) 25%, rgba(245, 238, 221, .58) 75%, var(--sky) 100%); }
+
+    /* watercolor washes behind sections */
+    .wash { position: absolute; z-index: 0; pointer-events: none; border-radius: 50%; filter: url(#wc-edge) blur(6px); opacity: .55; }
+
+    /* cards become inked paper */
+    .glass {
+      background: var(--paper); border: 1.5px solid rgba(52, 57, 74, .55); border-radius: var(--hand-box);
+      backdrop-filter: none; -webkit-backdrop-filter: none; box-shadow: 4px 5px 0 rgba(52, 57, 74, .10);
+    }
+    .tag { border: 1px solid rgba(52, 57, 74, .45); background: transparent; border-radius: 12px 4px 10px 5px / 5px 10px 4px 12px; font-size: 14px; color: var(--ink); }
+
+    /* nav */
+    nav.solid { background: rgba(245, 238, 221, .94); backdrop-filter: none; border-bottom: 1px solid var(--line); }
+    .nav-links a { font-family: var(--sans); font-size: 16px; letter-spacing: .14em; }
+    .nav-links a:hover { background: transparent; text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 1px; }
+
+    /* hero: a vintage magazine-cover feel */
+    .cover-line { display: flex; gap: 14px; align-items: center; font-family: var(--sans); font-style: italic; font-size: 17px; color: var(--cream-soft);
+      border-bottom: 1px solid rgba(52, 57, 74, .35); padding-bottom: 10px; margin-bottom: 6px; max-width: 520px; opacity: 0; animation: fade-in 1s .2s forwards; }
+    .cover-line span:last-child { margin-left: auto; }
+    .hero h1 { font-weight: 400; letter-spacing: -.01em; }
+    .walk-cta {
+      background: var(--rose); color: var(--ink); border: 1.5px solid var(--ink); box-shadow: 4px 4px 0 var(--ink);
+      border-radius: 40px 14px 38px 16px / 16px 38px 14px 40px;
+    }
+    .walk-cta:hover { box-shadow: 6px 6px 0 var(--ink); }
+    .walk-cta::before { display: none; }
+    .walk-cta .arrow { background: var(--paper); color: var(--ink); border: 1.5px solid var(--ink); }
+    .booth-card { background: var(--paper); border: 1px solid rgba(52, 57, 74, .35); box-shadow: 6px 8px 0 rgba(52, 57, 74, .12); border-radius: 3px; }
+    .booth-card::before, .polaroid::before { background: rgba(236, 200, 116, .75); }
+    .polaroid { background: var(--paper); border: 1px solid rgba(52, 57, 74, .3); box-shadow: 8px 10px 0 rgba(52, 57, 74, .12); }
+
+    /* about */
+    #about { background: var(--sky); box-shadow: 0 -1px 0 rgba(52, 57, 74, .35), 0 -20px 50px rgba(120, 90, 50, .10); }
+
+    /* right-now cards: paper with a wash of color */
+    .np-card { background: radial-gradient(120% 90% at 10% 10%, rgba(217, 147, 138, .35), transparent 60%), var(--paper);
+      border: 1.5px solid rgba(52, 57, 74, .55); border-radius: var(--hand-box); box-shadow: 4px 5px 0 rgba(52, 57, 74, .10); }
+    .build-card { background: radial-gradient(120% 90% at 90% 10%, rgba(236, 200, 116, .45), transparent 60%), var(--paper); }
+    .np-pill { background: var(--ink); color: var(--paper); border-radius: 10px 3px 9px 4px / 4px 9px 3px 10px; }
+    .np-dots i { background: rgba(52, 57, 74, .25); } .np-dots i.on { background: var(--ink); }
+    .check.done .tick { background: var(--ink); border-color: var(--ink); } .tick { border-color: rgba(52, 57, 74, .5); }
+
+    /* journey: ink-ruled list */
+    #journey .heading h2 em, .xp-org, #journey .heading .caps { color: var(--gold); }
+    .xp, .xp-row { border-color: rgba(52, 57, 74, .3); }
+    .xp-what li::marker { color: var(--rose); }
+    .xp:hover .xp-row:hover { background: rgba(251, 246, 234, .9); }
+
+    /* projects: each card gets its own watercolor wash */
+    .project:nth-child(3n+1) { background: radial-gradient(110% 80% at 15% 0%, rgba(236, 200, 116, .55), transparent 65%), var(--paper); }
+    .project:nth-child(3n+2) { background: radial-gradient(110% 80% at 85% 0%, rgba(217, 147, 138, .5), transparent 65%), var(--paper); }
+    .project:nth-child(3n+3) { background: radial-gradient(110% 80% at 50% 0%, rgba(157, 187, 220, .55), transparent 65%), var(--paper); }
+    .project:nth-child(n) .more { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+
+    /* hobby cards and photos: paper mats with a thin ink edge */
+    .tile { border: 6px solid var(--paper); outline: 1px solid rgba(52, 57, 74, .4); border-radius: 6px; }
+    .tile::after { background: linear-gradient(transparent 45%, rgba(40, 36, 30, .62)); }
+    .tile:hover, .tile:focus-visible { box-shadow: 8px 10px 0 rgba(52, 57, 74, .14); }
+    .shot { border: 6px solid var(--paper) !important; outline: 1px solid rgba(52, 57, 74, .35); border-radius: 4px; box-shadow: 4px 5px 0 rgba(52, 57, 74, .08); }
+    .shot.reveal, .tile.reveal { clip-path: inset(22% 0 0 0 round 4px); }
+    .shot.reveal.in, .tile.reveal.in { clip-path: inset(-12px -12px -12px -12px); }
+    .cs-r { color: var(--gold) !important; }
+    .cs-text span { text-shadow: 0 2px 26px rgba(245, 238, 221, .9); }
+
+    /* popups */
+    .modal-card { background: var(--paper); border: 1.5px solid rgba(52, 57, 74, .55); border-radius: var(--hand-box); }
+    .strip button { background: var(--paper); border: 1px solid rgba(52, 57, 74, .3); border-radius: 3px; box-shadow: 5px 6px 0 rgba(52, 57, 74, .10); }
+
+    /* contact */
+    .btn { border: 1.5px solid var(--ink); border-radius: 30px 10px 28px 12px / 12px 28px 10px 30px; font-family: var(--sans); font-size: 18px; }
+    .btn.primary { background: var(--rose); color: var(--ink); border-color: var(--ink); box-shadow: 4px 4px 0 var(--ink); }
+    .btn.primary:hover { background: #e3a49b; }
+    .contact-photo { border: 9px solid var(--paper); outline: 1px solid rgba(52, 57, 74, .35); box-shadow: 10px 12px 0 rgba(52, 57, 74, .12); border-radius: 3px; }
+
+    .strip-grid { position: relative; z-index: 1; }
+    /* hand-drawn ink doodles */
+    .doodle { position: absolute; z-index: 1; pointer-events: none; fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; opacity: .7; }
+    .doodle .fill-rose { fill: rgba(217, 147, 138, .55); stroke: none; }
+    .doodle .fill-butter { fill: rgba(236, 200, 116, .6); stroke: none; }
+    .doodle .fill-sky { fill: rgba(157, 187, 220, .55); stroke: none; }
+    @keyframes bob { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-8px) rotate(2deg); } }
+    .doodle.bob { animation: bob 6s ease-in-out infinite; }
+    @media (max-width: 760px) { .doodle.hide-sm { display: none; } }
   </style>
 </head>
 <body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <filter id="wc-edge"><feTurbulence type="fractalNoise" baseFrequency=".018" numOctaves="3" seed="7"/><feDisplacementMap in="SourceGraphic" scale="60"/></filter>
+  </svg>
 
   <nav id="nav">
     <a class="logo" href="#top">mihika<span style="color:var(--gold)">.</span></a>
@@ -599,7 +731,8 @@
     <div class="scene-bg" id="aboutBg"></div>
     <div class="inner">
       <div class="heading reveal"><div class="caps">01 — about</div><h2>a little <em>about me</em></h2></div>
-      <div class="about-grid">
+      <div class="about-grid" style="position:relative">
+        <svg class="doodle bob hide-sm" style="right:2%;top:-30px;width:90px;animation-delay:-2s" viewBox="0 0 100 80" aria-hidden="true"><path d="M20 60V22l22-6v38"/><ellipse class="fill-rose" cx="15" cy="60" rx="7" ry="5"/><ellipse cx="15" cy="60" rx="7" ry="5"/><ellipse class="fill-rose" cx="37" cy="54" rx="7" ry="5"/><ellipse cx="37" cy="54" rx="7" ry="5"/><path d="M72 46V14c6 3 12 6 14 14"/><ellipse class="fill-sky" cx="67" cy="46" rx="7" ry="5"/><ellipse cx="67" cy="46" rx="7" ry="5"/></svg>
         <figure class="polaroid reveal" id="aboutPhoto"></figure>
         <div class="glass about-card reveal" id="aboutCard"></div>
       </div>
@@ -608,6 +741,9 @@
   </div>
 
   <section class="scene" id="journey">
+    <div class="wash" style="width:620px;height:520px;right:-180px;top:40px;background:radial-gradient(circle, rgba(157,187,220,.65), transparent 70%)"></div>
+    <div class="wash" style="width:420px;height:380px;left:-160px;bottom:10%;background:radial-gradient(circle, rgba(169,194,160,.6), transparent 70%)"></div>
+    <svg class="doodle bob hide-sm" style="right:6%;top:70px;width:110px;animation-delay:-4s" viewBox="0 0 120 100" aria-hidden="true"><path class="fill-sky" d="M10 82c20 6 80 6 100 0"/><path d="M8 80c22 8 82 8 104 0M22 72h76l-10 10H32z"/><path style="fill:#fbf6ea;stroke:none" d="M58 10v60H24z"/><path d="M58 10v60H24zM62 22l30 48H62z"/><path class="fill-rose" d="M62 22l30 48H62z"/><path d="M58 10l10 4-10 4"/></svg>
     <div class="inner">
       <div class="heading reveal"><div class="caps">02 — the trail so far</div><h2>my <em>journey</em></h2></div>
       <div class="xp" id="xp"></div>
@@ -624,6 +760,8 @@
   </section>
 
   <section class="scene" id="loves">
+    <div class="wash" style="width:640px;height:520px;left:-200px;top:0;background:radial-gradient(circle, rgba(217,147,138,.55), transparent 70%)"></div>
+    <div class="wash" style="width:520px;height:460px;right:-160px;bottom:5%;background:radial-gradient(circle, rgba(236,200,116,.6), transparent 70%)"></div>
     <div class="love-title" aria-hidden="true"><div class="cs-text" id="loveTitle"><span class="cs-l">things i</span><span class="cs-r"><em>love</em></span></div></div>
     <div class="inner">
       <div class="heading reveal"><div class="caps">04 — off the clock</div><h2 class="sr-only">things i love</h2><p>Tap one to step inside.</p></div>
@@ -632,6 +770,8 @@
   </section>
 
   <section class="scene" id="photos">
+    <div class="wash" style="width:600px;height:500px;right:-200px;top:0;background:radial-gradient(circle, rgba(169,194,160,.6), transparent 70%)"></div>
+    <svg class="doodle bob hide-sm" style="left:3%;top:60px;width:84px;animation-delay:-1s" viewBox="0 0 100 100" aria-hidden="true"><path class="fill-butter" d="M22 40h48l-6 42H28z"/><path d="M22 40h48l-6 42H28zM70 50c12 0 14 18 0 18"/><path d="M36 30c-4-6 4-8 0-14M50 30c-4-6 4-8 0-14"/><path d="M16 88h62"/></svg>
     <div class="inner">
       <div class="heading reveal"><div class="caps">05 — camera roll</div><h2>little <em>moments</em></h2></div>
       <div class="masonry" id="masonry"></div>
@@ -639,6 +779,7 @@
   </section>
 
   <section class="scene contact" id="hi">
+    <svg class="doodle hide-sm" style="right:8%;top:120px;width:130px;z-index:2" viewBox="0 0 120 50" aria-hidden="true"><path d="M8 26c6-8 12-8 16 0 4-8 10-8 16 0"/><path d="M58 14c4-6 9-6 12 0 3-6 8-6 12 0"/><path d="M88 34c3-4 7-4 9 0 2-4 6-4 9 0"/></svg>
     <div class="scene-bg" id="contactBg"></div>
     <div class="inner contact-split">
       <div class="contact-text">
@@ -698,7 +839,7 @@
     </div>
   </div>
 
-  <script src="content.js?v=20261116h"></script>
+  <script src="content.js?v=20261116i"></script>
   <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
   <script>
     const S = window.SITE;
@@ -713,8 +854,10 @@
       const inner = i === a.length - 1 ? `<em>${esc(w)}</em>` : esc(w);
       return `<span class="w" style="animation-delay:${0.35 + i * 0.12}s">${inner}</span>`;
     }).join(" ");
+    const today = new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
     const textBlock = (top, title) => `
       <div class="hero-text" id="heroText">
+        <div class="cover-line"><span>${today}</span><span>Berkeley, Calif.</span><span>Price 25 cents</span></div>
         ${top}
         <h1>${words(title)}</h1>
         <a class="walk-cta" href="#about">get to know me <span class="arrow" aria-hidden="true">↓</span></a>
@@ -730,7 +873,11 @@
       hero.innerHTML = `<div class="strip-grid">
         ${textBlock("", S.heroLine)}
         <div class="booth">${card(back, "back", "")}${card(front, "", "")}
-        </div></div>`;
+        </div></div>
+        <div class="wash" style="width:520px;height:420px;left:-140px;top:8%;background:radial-gradient(circle, rgba(236,200,116,.75), transparent 70%)"></div>
+        <div class="wash" style="width:460px;height:400px;right:-120px;bottom:-60px;background:radial-gradient(circle, rgba(217,147,138,.6), transparent 70%)"></div>
+        <div class="wash" style="width:380px;height:320px;right:22%;top:-80px;background:radial-gradient(circle, rgba(157,187,220,.6), transparent 70%)"></div>
+        <svg class="doodle bob hide-sm" style="right:7%;top:15%;width:92px" viewBox="0 0 100 100" aria-hidden="true"><circle class="fill-butter" cx="50" cy="50" r="22"/><circle cx="50" cy="50" r="20"/><path d="M50 14v-9M50 95v-9M14 50H5M95 50h-9M24 24l-6-6M82 82l-6-6M24 76l-6 6M82 18l-6 6"/></svg><svg class="doodle hide-sm" style="left:42%;top:16%;width:120px" viewBox="0 0 120 50" aria-hidden="true"><path d="M8 26c6-8 12-8 16 0 4-8 10-8 16 0"/><path d="M58 14c4-6 9-6 12 0 3-6 8-6 12 0"/><path d="M88 34c3-4 7-4 9 0 2-4 6-4 9 0"/></svg>`;
     }
     hero.addEventListener("click", (e) => {
       const t = e.target.closest("[data-hero]");
@@ -858,13 +1005,14 @@
 
     /* ================= scroll-driven world ================= */
     const skyStops = [
-      [0.00, [234, 243, 255]],  // baby blue
-      [0.20, [236, 234, 252]],  // lavender (journey)
-      [0.40, [255, 238, 233]],  // blush
-      [0.60, [255, 246, 226]],  // butter
-      [0.80, [241, 236, 252]],  // lilac
-      [1.00, [230, 238, 252]],  // soft blue
+      [0.00, [245, 238, 221]],  // cream paper
+      [0.20, [247, 240, 226]],  // warm cream
+      [0.40, [247, 235, 228]],  // faint rose wash
+      [0.60, [246, 240, 220]],  // butter
+      [0.80, [237, 239, 236]],  // faint sky wash
+      [1.00, [244, 236, 222]],  // paper
     ];
+
     function skyAt(p) {
       for (let i = 1; i < skyStops.length; i++) {
         const [p1, c1] = skyStops[i], [p0, c0] = skyStops[i - 1];
