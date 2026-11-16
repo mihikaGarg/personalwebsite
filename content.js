@@ -36,6 +36,7 @@ window.SITE = {
     {
       emoji: "🌊", title: "the beach", blurb: "",
       cover: P("palm-beach.jpg"),
+      wide: true,
       story: "",
       photos: [
         { src: P("me-beach-sunset.jpg"), caption: "" },
@@ -43,6 +44,7 @@ window.SITE = {
         { src: P("beach-horses.jpg"), caption: "" },
         { src: P("beach-surfboard.jpg"), caption: "" },
         { src: P("beach-sunset.jpg"), caption: "" },
+        { src: P("ferry-sunset.jpg"), caption: "" },
       ],
     },
     {
@@ -54,6 +56,7 @@ window.SITE = {
         { src: P("dog-1.jpg"), caption: "" },
         { src: P("dog-3.jpg"), caption: "" },
         { src: P("dog-selfie.jpg"), caption: "" },
+        { src: P("dog-window.jpg"), caption: "" },
       ],
     },
     {
@@ -61,7 +64,7 @@ window.SITE = {
       cover: P("concert.jpg"),
       collage: true,             // card shows a collage of the album covers below
       story: "",
-      photos: [{ src: P("concert.jpg"), caption: "" }],
+      photos: [{ src: P("concert.jpg"), caption: "" }, { src: P("concert-2.jpg"), caption: "" }],
       vinyls: [
         { artist: "Olivia Dean", album: "The Art of Loving", tag: "on repeat", color: "#7fb3f0", cover: "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/08/e2/21/08e22164-7c0b-1522-818f-e0e74f62dc49/25UMGIM69703.rgb.jpg/600x600bb.jpg" },
         { artist: "SZA", album: "SOS", tag: "on repeat", color: "#9aa8f0", cover: "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/62/93/13/6293132e-20ff-67ab-3d1f-96bb6797a6ba/196589564955.jpg/600x600bb.jpg" },
@@ -80,24 +83,43 @@ window.SITE = {
         { src: P("friend-marina.jpg"), caption: "" },
         { src: P("friend-brunch.jpg"), caption: "" },
         { src: P("friend-dorm.jpg"), caption: "" },
+        { src: P("friends-group.jpg"), caption: "" },
+        { src: P("friends-balloons.jpg"), caption: "" },
+        { src: P("friend-berkeley.jpg"), caption: "" },
+        { src: P("friend-beach.jpg"), caption: "" },
       ],
     },
     {
-      emoji: "☕", title: "coffee spots", blurb: "",
+      emoji: "🧋", title: "fun drinks", blurb: "",
       cover: P("coffee-bagel.jpg"),
       story: "",
-      photos: [],
-      list: [],               // add favorite cafés here, e.g. "Café Name — what to order"
+      photos: [
+        { src: P("coffee-bagel.jpg"), caption: "" },
+        { src: P("drink-matcha.jpg"), caption: "" },
+        { src: P("drink-lattes.jpg"), caption: "" },
+        { src: P("drink-matcha-2.jpg"), caption: "" },
+      ],
+    },
+    {
+      emoji: "🏂", title: "skiing", blurb: "",
+      cover: P("ski-board.jpg"),
+      story: "",
+      photos: [
+        { src: P("ski-board.jpg"), caption: "" },
+        { src: P("ski-slope.jpg"), caption: "" },
+      ],
     },
     {
       emoji: "🌲", title: "walks & hikes", blurb: "",
       cover: P("ocean-trees.jpg"),
+      wide: true,
       story: "",
       photos: [
         { src: P("waterfall-jungle.jpg"), caption: "" },
         { src: P("ocean-trees.jpg"), caption: "" },
         { src: P("tahoe-walk.jpg"), caption: "" },
         { src: P("tahoe-lake.jpg"), caption: "" },
+        { src: P("city-skyline.jpg"), caption: "" },
       ],
     },
   ],
@@ -208,6 +230,10 @@ window.SITE = {
     { src: P("me-beach-sunset.jpg"), caption: "" },
     { src: P("waterfall-jungle.jpg"), caption: "" },
     { src: P("beach-sunset.jpg"), caption: "" },
+    { src: P("friends-group.jpg"), caption: "" },
+    { src: P("ski-board.jpg"), caption: "" },
+    { src: P("friend-beach.jpg"), caption: "" },
+    { src: P("drink-lattes.jpg"), caption: "" },
   ],
 
   contact: {
