@@ -64,7 +64,7 @@ window.SITE = {
       cover: P("concert.jpg"),
       collage: true,             // card shows a collage of the album covers below
       story: "",
-      photos: [{ src: P("concert.jpg"), caption: "" }, { src: P("concert-2.jpg"), caption: "" }],
+      photos: [],
       vinyls: [
         { artist: "Olivia Dean", album: "The Art of Loving", tag: "on repeat", color: "#7fb3f0", cover: "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/08/e2/21/08e22164-7c0b-1522-818f-e0e74f62dc49/25UMGIM69703.rgb.jpg/600x600bb.jpg" },
         { artist: "SZA", album: "SOS", tag: "on repeat", color: "#9aa8f0", cover: "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/62/93/13/6293132e-20ff-67ab-3d1f-96bb6797a6ba/196589564955.jpg/600x600bb.jpg" },
@@ -102,17 +102,29 @@ window.SITE = {
     },
     {
       emoji: "🏂", title: "skiing", blurb: "",
-      cover: P("ski-board.jpg"),
+      cover: P("ski-chairlift.jpg"),
       story: "",
       photos: [
+        { src: P("ski-chairlift.jpg"), caption: "" },
+        { src: P("ski-blue-sky.jpg"), caption: "" },
+        { src: P("ski-lift-trees.jpg"), caption: "" },
+        { src: P("ski-friends.jpg"), caption: "" },
         { src: P("ski-board.jpg"), caption: "" },
         { src: P("ski-slope.jpg"), caption: "" },
       ],
     },
     {
+      emoji: "🎤", title: "concerts", blurb: "",
+      cover: P("concert.jpg"),
+      story: "",
+      photos: [
+        { src: P("concert.jpg"), caption: "" },
+        { src: P("concert-2.jpg"), caption: "" },
+      ],
+    },
+    {
       emoji: "🌲", title: "walks & hikes", blurb: "",
       cover: P("ocean-trees.jpg"),
-      wide: true,
       story: "",
       photos: [
         { src: P("waterfall-jungle.jpg"), caption: "" },

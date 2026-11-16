@@ -266,6 +266,7 @@
       animation: spin 2s linear infinite;
     }
     /* loves */
+    .amp { font-family: var(--sans, "DM Sans", sans-serif); font-weight: 500; font-size: .82em; }
     .tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
     @media (min-width: 980px) { .tiles { grid-template-columns: repeat(3, 1fr); } .tile.wide { grid-column: span 2; } }
     .tile {
@@ -692,7 +693,7 @@
       <button class="tile reveal${h.wide ? " wide" : ""}" data-hobby="${i}" aria-label="Open ${esc(h.title)}">
         ${h.collage && h.vinyls ? `<div class="collage">${[0, 1, 2, 3, 4, 5, 2, 0, 4].map((k) => `<img src="${esc(h.vinyls[k].cover)}" alt="" loading="lazy">`).join("")}</div>` : `<img src="${esc(h.cover)}" alt="" loading="lazy">`}
         <span class="open">open →</span>
-        <div class="tile-body"><span class="emoji">${esc(h.emoji)}</span><h3>${esc(h.title)}</h3>${h.blurb ? `<p>${esc(h.blurb)}</p>` : ""}</div>
+        <div class="tile-body"><span class="emoji">${esc(h.emoji)}</span><h3>${amp(h.title)}</h3>${h.blurb ? `<p>${esc(h.blurb)}</p>` : ""}</div>
       </button>`).join("");
 
     bg($("projectsBg"), "photos/waterfall-jungle.jpg");
@@ -845,8 +846,9 @@
         <button data-strip="${i}" aria-label="Open photo"><img src="${esc(ph.src)}" alt="${esc(ph.caption)}" loading="lazy">
         ${ph.caption ? `<span class="cap">${esc(ph.caption)}</span>` : ""}</button>`).join("")}</div>`;
     }
+    function amp(s) { return esc(s).replace(/&amp;/g, '<span class="amp">&amp;</span>'); }
     function openHobby(h) {
-      let html = `<div class="emoji">${esc(h.emoji)}</div><h3>${esc(h.title)}</h3>${h.story ? `<p>${esc(h.story)}</p>` : ""}`;
+      let html = `<div class="emoji">${esc(h.emoji)}</div><h3>${amp(h.title)}</h3>${h.story ? `<p>${esc(h.story)}</p>` : ""}`;
       if (h.vinyls) {
         html += `<div class="crate">${h.vinyls.map((v, i) => `
           <button class="vinyl" data-vinyl="${i}" style="--sl:${v.color};--lab:${v.color}" aria-label="Play ${esc(v.artist)}">
