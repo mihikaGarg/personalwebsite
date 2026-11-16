@@ -84,7 +84,7 @@ window.SITE = {
     },
     {
       emoji: "☕", title: "coffee spots", blurb: "",
-      cover: P("me-jungle.jpg"),
+      cover: P("coffee-bagel.jpg"),
       story: "",
       photos: [],
       list: [],               // add favorite cafés here, e.g. "Café Name — what to order"
