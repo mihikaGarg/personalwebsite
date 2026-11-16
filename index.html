@@ -304,14 +304,13 @@
     .tile:hover .open, .tile:focus-visible .open { opacity: 1; transform: none; }
 
     /* projects */
-    .projects { display: flex; flex-direction: column; gap: 28px; max-width: 980px; padding-bottom: 8vh; }
-    .project { position: sticky; top: calc(96px + var(--i) * 22px); min-height: 54vh; transform-origin: 50% 0; will-change: transform; }
+    .projects { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
     .project .pnum { font-family: var(--serif); font-style: italic; font-size: 22px; color: var(--cream-soft); }
     .project {
-      text-align: left; padding: clamp(28px, 4vw, 52px); cursor: pointer; display: flex; flex-direction: column; gap: 14px;
-      transition: box-shadow .3s;
+      text-align: left; padding: 28px; cursor: pointer; display: flex; flex-direction: column; gap: 10px;
+      transition: transform .5s cubic-bezier(.2, .8, .2, 1), background .3s;
     }
-    .project:hover, .project:focus-visible { box-shadow: 0 24px 50px rgba(47, 61, 92, .22); }
+    .project:hover, .project:focus-visible { transform: translateY(-6px) rotate(-.5deg); }
     .project:nth-child(3n+1) { background: linear-gradient(150deg, rgba(255, 246, 222, .92), rgba(255, 233, 196, .85)); }
     .project:nth-child(3n+2) { background: linear-gradient(150deg, rgba(255, 238, 234, .92), rgba(255, 214, 206, .85)); }
     .project:nth-child(3n+3) { background: linear-gradient(150deg, rgba(234, 248, 240, .92), rgba(205, 236, 220, .85)); }
@@ -319,8 +318,7 @@
     .project-top { display: flex; justify-content: space-between; align-items: center; }
     .project .emoji { font-size: 34px; }
     .project .year { color: var(--cream-soft); font-size: 14px; }
-    .project h3 { font-size: clamp(40px, 6.5vw, 84px); line-height: 1; letter-spacing: -.02em; }
-    .project p { font-size: clamp(17px, 1.6vw, 21px); max-width: 640px; }
+    .project h3 { font-size: 30px; }
     .project p { margin: 0; color: var(--cream-soft); flex: 1; }
     .tags { display: flex; flex-wrap: wrap; gap: 6px; }
     .tag { font-size: 12px; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--line); background: rgba(255, 255, 255, .5); color: var(--cream-soft); }
@@ -381,8 +379,10 @@
     .awards span { padding: 8px 16px; border-radius: 999px; }
 
     /* photos */
-    .masonry { display: flex; gap: 14px; align-items: flex-start; }
+    .masonry { display: flex; gap: 14px; align-items: stretch; }
     .mcol { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 14px; }
+    .mcol .shot:last-child { flex: 1; display: flex; }
+    .mcol .shot:last-child img { height: 100%; object-fit: cover; }
     .mcol .shot { margin: 0 !important; }
     .shot {
       break-inside: avoid; margin: 0 0 14px; border-radius: 14px; border: 3px solid #fff !important; box-shadow: 0 10px 24px rgba(100, 140, 200, .18); overflow: hidden; cursor: zoom-in;
@@ -426,18 +426,20 @@
       --k: clamp(0, calc(var(--t, 1) * (var(--n) + 5) - var(--i)), 1);
       opacity: var(--k); transform: translateY(calc((1 - var(--k)) * .55em)) rotate(calc((1 - var(--k)) * 9deg));
       filter: blur(calc((1 - var(--k)) * 5px)); }
-    /* big moving type band */
-    .bigtype { position: relative; z-index: 1; overflow: hidden; padding: 70px 0 40px; }
-    .bt-row { white-space: nowrap; font-family: var(--serif); font-size: clamp(60px, 11vw, 168px); line-height: 1.04; letter-spacing: -.02em; will-change: transform; }
-    .bt-row:nth-child(2) { font-style: italic; color: #6d58c9; }
-    .bt-row i { font-style: normal; color: var(--gold); padding: 0 .28em; font-size: .6em; vertical-align: .2em; }
+    /* hero stays put while the about section slides up over it */
+    .intro { position: relative; }
+    .intro .hero { position: sticky; top: 0; z-index: 0; transform-origin: 50% 30%; will-change: transform, filter; }
+    #about { z-index: 2; background: var(--sky); border-radius: 44px 44px 0 0; box-shadow: 0 -24px 60px rgba(60, 80, 130, .14); }
+    @media (max-width: 700px) { #about { border-radius: 28px 28px 0 0; } }
     /* pinned circle reveal */
     .circle-scene { position: relative; height: 230vh; }
     .cs-stage { position: sticky; top: 0; height: 100vh; overflow: hidden; display: grid; place-items: center; }
-    .cs-photo { position: absolute; inset: 0; background: url("photos/palm-beach.jpg") center/cover;
+    .cs-photo { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: repeat(3, minmax(0, 1fr)); gap: 10px; background: #fff;
       clip-path: circle(var(--r, 9%) at 50% 50%); transform: scale(var(--z, 1.18)); will-change: clip-path, transform; }
     .cs-text { position: relative; z-index: 2; display: flex; gap: .28em; font-family: var(--serif); font-size: clamp(52px, 11vw, 168px);
       line-height: 1; letter-spacing: -.02em; pointer-events: none; opacity: var(--o, 1); }
+    .cs-photo img { width: 100%; height: 100%; min-height: 0; object-fit: cover; display: block; }
+    .cs-text { margin: 0; font-weight: 400; }
     .cs-text span { text-shadow: 0 2px 30px rgba(255, 255, 255, .55); }
     .cs-l { transform: translateX(calc(var(--s, 0) * -45vw)); }
     .cs-r { transform: translateX(calc(var(--s, 0) * 45vw)); color: #6d58c9; }
@@ -564,6 +566,7 @@
     </div>
   </nav>
 
+  <div class="intro">
   <header class="hero" id="top"></header>
 
 
@@ -577,6 +580,7 @@
       </div>
     </div>
   </section>
+  </div>
 
   <section class="scene" id="journey">
     <div class="inner">
@@ -587,11 +591,6 @@
     </div>
   </section>
 
-  <div class="bigtype" id="bigtype" aria-hidden="true">
-    <div class="bt-row" data-dir="1"></div>
-    <div class="bt-row" data-dir="-1"></div>
-  </div>
-
   <section class="scene" id="projects">
     <div class="scene-bg" id="projectsBg"></div>
     <div class="inner">
@@ -600,16 +599,16 @@
     </div>
   </section>
 
-  <section class="circle-scene" id="offline" aria-hidden="true">
+  <section class="circle-scene" id="offline">
     <div class="cs-stage" id="csStage">
-      <div class="cs-photo"></div>
-      <div class="cs-text"><span class="cs-l">when i'm</span><span class="cs-r"><em>offline</em></span></div>
+      <div class="cs-photo" id="csMosaic"></div>
+      <h2 class="cs-text"><span class="cs-l">things i</span><span class="cs-r"><em>love</em></span></h2>
     </div>
   </section>
 
   <section class="scene" id="loves">
     <div class="inner">
-      <div class="heading reveal"><div class="caps">04 — off the clock</div><h2>things i <em>love</em></h2><p>Tap one to step inside.</p></div>
+      <div class="heading reveal"><div class="caps">04 — off the clock</div><p>Tap one to step inside.</p></div>
       <div class="tiles" id="tiles"></div>
     </div>
   </section>
@@ -681,7 +680,7 @@
     </div>
   </div>
 
-  <script src="content.js?v=20261116e"></script>
+  <script src="content.js?v=20261116f"></script>
   <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
   <script>
     const S = window.SITE;
@@ -769,7 +768,7 @@
 
     bg($("projectsBg"), "photos/waterfall-jungle.jpg");
     $("projectsGrid").innerHTML = S.projects.map((p, i) => `
-      <button class="glass project" data-project="${i}" style="--i:${i}">
+      <button class="glass project reveal" data-project="${i}">
         <div class="project-top"><span class="pnum">0${i + 1}</span><span class="year">${esc(p.year)}</span></div>
         <h3>${esc(p.title)}</h3>
         <p>${esc(p.blurb)}</p>
@@ -796,17 +795,26 @@
     $("awards").innerHTML = S.awards.map((a) => `<span class="glass reveal">${esc(a)}</span>`).join("");
 
     // photos fill row by row (left to right), so the order in content.js is the order you see
+    // height/width of each photo (used to balance the gallery columns)
+    const PHOTO_RATIO = {"beach-horses":0.75,"beach-sunset":1.333,"beach-surfboard":1.333,"city-skyline":1.333,"coffee-bagel":0.75,"concert-2":1.333,"concert":1.778,"dog-1":1.333,"dog-3":1.333,"dog-me":1.333,"dog-selfie":1.778,"dog-window":1.333,"drink-lattes":1.333,"drink-matcha-2":1.333,"drink-matcha":1.333,"ferry-sunset":1.333,"friend-beach":0.75,"friend-berkeley":1.501,"friend-brunch":1.333,"friend-dorm":1.333,"friend-marina":1.333,"friends-balloons":0.75,"friends-formal":1.501,"friends-group":1.501,"me-balloons":1.333,"me-beach-sunset":1.333,"me-ftc":0.75,"me-jungle":1.333,"me-trees":1.501,"me-waterfall":1.501,"ocean-trees-2":1.333,"ocean-trees":0.75,"palm-beach":0.75,"ski-blue-sky":1.333,"ski-board":1.333,"ski-chairlift":1.778,"ski-friends":1.333,"ski-lift-trees":1.333,"ski-slope":1.333,"sticker-stand":1.333,"tahoe-lake":1.778,"tahoe-walk":1.333,"waterfall-jungle":1.333};
     let galleryCols = 0;
     function renderGallery(revealed) {
       const n = innerWidth >= 1000 ? 4 : innerWidth >= 700 ? 3 : 2;
       if (n === galleryCols) return;
       galleryCols = n;
       const cols = Array.from({ length: n }, () => []);
-      S.gallery.forEach((g, i) => cols[i % n].push(`
+      const heights = new Array(n).fill(0);
+      S.gallery.forEach((g, i) => {
+        // drop each photo into the currently shortest column so the bottoms line up
+        const k = heights.indexOf(Math.min(...heights));
+        const name = g.src.split("/").pop().replace(/\.[^.]+$/, "");
+        heights[k] += (PHOTO_RATIO[name] || 1.25) + 0.08;
+        cols[k].push(`
         <button class="shot reveal${revealed ? " in" : ""}" data-shot="${i}" aria-label="Open photo">
           <img src="${esc(g.src)}" alt="${esc(g.caption || "photo")}" loading="lazy">
           ${g.caption ? `<span class="cap">${esc(g.caption)}</span>` : ""}
-        </button>`));
+        </button>`);
+      });
       $("masonry").innerHTML = cols.map((c) => `<div class="mcol">${c.join("")}</div>`).join("");
     }
     renderGallery(false);
@@ -874,15 +882,10 @@
     const splits = [...document.querySelectorAll(".heading h2, .contact h2")];
     splits.forEach(splitChars);
 
-    /* big type band */
-    const btWords = [["matcha", "dogs", "the beach", "skiing", "concerts", "my people"], ["building things", "walks", "olivia dean on repeat", "hackathons", "sunsets"]];
-    document.querySelectorAll(".bt-row").forEach((row, k) => {
-      const one = btWords[k].map((w) => `${esc(w)}<i>✦</i>`).join("");
-      row.innerHTML = one + one + one;
-    });
-    const btRows = [...document.querySelectorAll(".bt-row")];
-    const projCards = [...document.querySelectorAll(".project")];
+    const heroEl = $("top");
     const csScene = $("offline"), csStage = $("csStage");
+    $("csMosaic").innerHTML = ["palm-beach", "friends-formal", "drink-matcha", "ski-chairlift", "dog-3", "concert", "ocean-trees", "friends-group", "coffee-bagel"]
+      .map((f) => `<img src="photos/${f}.jpg" alt="" loading="lazy">`).join("");
     const clamp01 = (v) => Math.min(1, Math.max(0, v));
 
     function motion(vh) {
@@ -891,12 +894,16 @@
         if (r.top > vh * 1.2 || r.bottom < -200) continue;
         el.style.setProperty("--t", clamp01((vh * 0.95 - r.top) / (vh * 0.45)).toFixed(3));
       }
-      const bt = $("bigtype").getBoundingClientRect();
-      if (bt.bottom > 0 && bt.top < vh) {
-        btRows.forEach((row) => {
-          const dir = +row.dataset.dir;
-          row.style.transform = `translateX(calc(-33.3% + ${((bt.top - vh) * 0.45 * dir).toFixed(1)}px))`;
-        });
+      // hero sinks back as about rises over it
+      const ab = $("about").getBoundingClientRect().top;
+      if (ab > -vh) {
+        const p = clamp01(1 - ab / vh);
+        heroEl.style.transform = `scale(${(1 - p * 0.1).toFixed(4)}) translateY(${(p * -6).toFixed(2)}%)`;
+        heroEl.style.filter = `blur(${(p * 6).toFixed(2)}px)`;
+        heroEl.style.opacity = (1 - p * 0.55).toFixed(3);
+        const booth = heroEl.querySelector(".booth");
+        if (booth) booth.style.transform = `rotate(${(p * 10).toFixed(2)}deg) translate(${(p * 8).toFixed(2)}%, ${(p * -10).toFixed(2)}%)`;
+        $("about").style.borderRadius = `${(44 * (1 - p * 0.6)).toFixed(1)}px ${(44 * (1 - p * 0.6)).toFixed(1)}px 0 0`;
       }
       const cs = csScene.getBoundingClientRect();
       if (cs.bottom > 0 && cs.top < vh) {
@@ -907,14 +914,6 @@
         csStage.style.setProperty("--s", e.toFixed(3));
         csStage.style.setProperty("--o", (1 - clamp01((p - 0.35) / 0.4)).toFixed(3));
       }
-      projCards.forEach((card, i) => {
-        const next = projCards[i + 1];
-        if (!next) return;
-        const top = 96 + i * 22;
-        const cover = clamp01(1 - (next.getBoundingClientRect().top - top) / (vh * 0.75));
-        card.style.transform = `scale(${(1 - cover * 0.06).toFixed(4)})`;
-        card.style.filter = `brightness(${(1 - cover * 0.07).toFixed(3)})`;
-      });
       for (const el of sceneBgs) {
         const rect = el.parentElement.getBoundingClientRect();
         if (rect.bottom < 0 || rect.top > vh) continue;
