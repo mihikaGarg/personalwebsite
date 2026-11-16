@@ -326,7 +326,35 @@
     .more::after { content: " →"; display: inline-block; transition: transform .3s; }
     .project:hover .more::after { transform: translateX(5px); }
 
-    /* journey */
+    /* journey: a clean typographic list (dates | role + details | number) */
+    .xp { max-width: 1000px; border-top: 1px solid var(--line); }
+    .xp-row { display: grid; grid-template-columns: 170px 1fr 130px; gap: 28px; padding: 30px 18px; margin: 0 -18px;
+      border-bottom: 1px solid var(--line); border-radius: 0; transition: background .35s, opacity .35s, border-radius .35s; }
+    .xp:hover .xp-row { opacity: .45; }
+    .xp:hover .xp-row:hover { opacity: 1; background: rgba(255, 255, 255, .6); border-radius: 18px; border-bottom-color: transparent; }
+    .xp-when { font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--cream-soft); padding-top: 6px; line-height: 1.6; }
+    .xp-when span { display: block; letter-spacing: .04em; text-transform: none; font-size: 14px; opacity: .8; }
+    .xp-what h3 { font-size: clamp(22px, 2.3vw, 27px); line-height: 1.2; margin: 0 0 10px; font-weight: 500; }
+    .xp-org { display: block; font-family: var(--sans); font-size: 16px; color: #6d58c9; margin-top: 4px; font-weight: 500; }
+    .xp-sub { margin: 0 0 12px; color: var(--cream-soft); }
+    .xp-what ul { margin: 0; padding-left: 18px; color: var(--cream-soft); }
+    .xp-what li { margin-bottom: 5px; }
+    .xp-what li::marker { color: #9c8fd8; }
+    .xp-stat { text-align: right; padding-top: 2px; }
+    .xp-stat b { display: block; font-family: var(--serif); font-size: 40px; line-height: 1; font-weight: 500; color: var(--cream); }
+    .xp-stat span { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--cream-soft); }
+    .xp-awards { display: grid; grid-template-columns: 170px 1fr; gap: 28px; max-width: 1000px; margin-top: 30px; align-items: start; }
+    .xp-awards .awards { display: flex; flex-direction: column; gap: 6px; max-width: none; margin: 0; padding: 0; }
+    .xp-awards .awards span { font-size: 16px; padding: 0; border-radius: 0; }
+    @media (max-width: 760px) {
+      .xp-row { grid-template-columns: 1fr; gap: 10px; padding: 24px 0; margin: 0; }
+      .xp-stat { text-align: left; display: flex; align-items: baseline; gap: 10px; }
+      .xp-stat:empty { display: none; }
+      .xp-stat b { display: inline; font-size: 30px; }
+      .xp-awards { grid-template-columns: 1fr; gap: 8px; }
+      .xp:hover .xp-row { opacity: 1; }
+    }
+    /* (old trail styles kept below are unused) */
     .trail { position: relative; max-width: 760px; margin: 0 auto; padding-left: 64px; }
     .trail svg.path { position: absolute; left: 0; top: 0; width: 40px; height: 100%; overflow: visible; }
     .trail svg.path path { fill: none; stroke: var(--sage); stroke-width: 2; stroke-dasharray: 2 9; stroke-linecap: round; }
@@ -584,10 +612,9 @@
 
   <section class="scene" id="journey">
     <div class="inner">
-      <div class="heading reveal"><div class="caps">02 — the trail so far</div><h2>my <em>journey</em></h2><p>Click a stop to see what I did there.</p></div>
-      <div class="glass edu reveal" id="edu"></div>
-      <div class="trail" id="trail"></div>
-      <div class="awards" id="awards"></div>
+      <div class="heading reveal"><div class="caps">02 — the trail so far</div><h2>my <em>journey</em></h2></div>
+      <div class="xp" id="xp"></div>
+      <div class="xp-awards reveal"><div class="xp-when">awards</div><div class="awards" id="awards"></div></div>
     </div>
   </section>
 
@@ -680,7 +707,7 @@
     </div>
   </div>
 
-  <script src="content.js?v=20261116f"></script>
+  <script src="content.js?v=20261116g"></script>
   <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
   <script>
     const S = window.SITE;
@@ -777,22 +804,28 @@
       </button>`).join("");
 
     const E = S.education;
-    $("edu").innerHTML = `<div>
-      <div class="dates">${esc(E.dates)} · Berkeley, CA</div><h3>${esc(E.school)} <span class="now-pill">CURRENTLY</span></h3>
-      <div class="deg">${esc(E.degree)}</div><div class="col">${esc(E.college)}</div>
-      <div class="tags">${E.courses.map((t) => `<span class="tag">${esc(t)}</span>`).join("")}</div></div>`;
-    $("trail").innerHTML = `<svg class="path" preserveAspectRatio="none" viewBox="0 0 40 100" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M15 2 C 30 15, 0 25, 15 38 S 30 62, 15 75 S 0 90, 15 98" /></svg>` +
-      S.experience.map((x, i) => `
-      <div class="glass stop reveal${i === 0 ? " open" : ""}">
-        <span class="badge" aria-hidden="true"></span>
-        <button class="stop-btn" aria-expanded="${i === 0}">
-          <div><div class="dates">${esc(x.dates)} · ${esc(x.place)}</div><h3>${esc(x.role)}</h3><div class="org">${esc(x.org)}</div></div>
-          ${x.stat ? `<div class="stat"><b>${esc(x.stat)}</b><span>${esc(x.statLabel || "")}</span></div>` : ""}
-          <span class="plus" aria-hidden="true">+</span>
-        </button>
-        <div class="stop-details"><div><ul>${x.details.map((d) => `<li>${esc(d)}</li>`).join("")}</ul></div></div>
-      </div>`).join("");
-    $("awards").innerHTML = S.awards.map((a) => `<span class="glass reveal">${esc(a)}</span>`).join("");
+    const year = (d) => esc(d).replace(/ – /g, " — ");
+    $("xp").innerHTML = [
+      `<article class="xp-row reveal">
+        <div class="xp-when">${esc(E.dates)}<span>Berkeley, CA</span></div>
+        <div class="xp-what">
+          <h3>${esc(E.school)} <span class="xp-org">${esc(E.degree)}</span></h3>
+          <p class="xp-sub">${esc(E.college)}</p>
+          <div class="tags">${E.courses.map((t) => `<span class="tag">${esc(t)}</span>`).join("")}</div>
+        </div>
+        <div class="xp-stat"></div>
+      </article>`,
+      ...S.experience.map((x) => `
+      <article class="xp-row reveal">
+        <div class="xp-when">${year(x.dates)}<span>${esc(x.place)}</span></div>
+        <div class="xp-what">
+          <h3>${amp(x.role)} <span class="xp-org">${esc(x.org)}</span></h3>
+          <ul>${x.details.map((d) => `<li>${esc(d)}</li>`).join("")}</ul>
+        </div>
+        <div class="xp-stat">${x.stat ? `<b>${esc(x.stat)}</b><span>${esc(x.statLabel || "")}</span>` : ""}</div>
+      </article>`),
+    ].join("");
+    $("awards").innerHTML = S.awards.map((a) => `<span>${esc(a)}</span>`).join("");
 
     // photos fill row by row (left to right), so the order in content.js is the order you see
     // height/width of each photo (used to balance the gallery columns)
