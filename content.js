@@ -246,7 +246,7 @@ window.SITE = {
 
   contact: {
     bg: P("beach-sunset.jpg"),
-    blurb: "Thanks for walking with me! I'm always down to chat about projects, hackathons, coffee spots, or dogs.",
+    blurb: "Thanks for walking with me! I'm always down to chat and get to know you!",
     email: "mihikagarg@berkeley.edu",
     github: "https://github.com/mihikaGarg",
     linkedin: "https://linkedin.com/in/mihika-garg",
