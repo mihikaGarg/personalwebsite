@@ -14,7 +14,7 @@ window.SITE = {
     photo: P("me-beach-sunset.jpg"),
     caption: "",
     paras: [
-      "I'm a student at UC Berkeley studying Data Science and Computer Science. I love building things that actually help people, like AI tools for kids and seniors, or systems that make sure money goes where it's supposed to.",
+      "I'm a student at UC Berkeley studying Data Science and Computer Science. I love learning about AI and ML and using it to build projects that have a real impact and help people, like AI tools for kids and seniors.",
       "Off the clock I'm on a walk, on a trail, at the beach, or hunting for a new coffee spot. And I will stop to say hi to every single dog.",
     ],
   },
