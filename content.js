@@ -21,13 +21,15 @@ window.SITE = {
 
   // "right now" box: the record player cycles through the music vinyls below,
   // and the little terminal types these lines out
-  building: [
-    "$ cd replit/student-build-nights",
-    "$ npm run build-night",
-    "✓ 40 first-time builders checked in",
-    "✓ toolkit live: intake · launcher · tracker",
-    "✓ funnel: activation → ship rate → retention",
-  ],
+  building: {
+    title: "student build nights",
+    place: "@ Replit",
+    items: [
+      "40 first-time builders per night",
+      "a toolkit to run it: intake, launcher, tracker",
+      "measuring who ships and who comes back",
+    ],
+  },
 
   // Click any of these on the site to open its little story
   hobbies: [
@@ -148,7 +150,7 @@ window.SITE = {
 
   experience: [
     {
-      role: "Software Developer & Data Analyst", org: "Replit (contract)", icon: "💻", stat: "80", statLabel: "student builders", dates: "Aug 2026 – now", place: "Berkeley, CA",
+      role: "Software Developer & Data Analyst", org: "Replit (contract)", stat: "80", statLabel: "student builders", dates: "Aug 2026 – now", place: "Berkeley, CA",
       details: [
         "Writing a Python/SQL pipeline for funnel metrics: activation, ship rate, retention.",
         "Running 2 build events with 40 first-time student builders each, tracking where students get stuck and come back.",
@@ -156,7 +158,7 @@ window.SITE = {
       ],
     },
     {
-      role: "Instructor & Coach", org: "Magikid Robotics Lab", icon: "🤖", stat: "100+", statLabel: "K–6 students", dates: "Jun 2025 – Jul 2026", place: "Cupertino, CA",
+      role: "Instructor & Coach", org: "Magikid Robotics Lab", stat: "100+", statLabel: "K–6 students", dates: "Jun 2025 – Jul 2026", place: "Cupertino, CA",
       details: [
         "Mentored 100+ K–6 students in VEX Go, VEX IQ, Scratch, and Tinkercad.",
         "Launched the lab's first LEGO Spike curriculum.",
@@ -164,7 +166,7 @@ window.SITE = {
       ],
     },
     {
-      role: "Co-Founder", org: "Tech with Teens", icon: "👵", stat: "200+", statLabel: "seniors taught", dates: "Jun 2023 – May 2026", place: "San Jose, CA",
+      role: "Co-Founder", org: "Tech with Teens", stat: "200+", statLabel: "seniors taught", dates: "Jun 2023 – May 2026", place: "San Jose, CA",
       details: [
         "Grew a tech-literacy program to 4 senior living communities, serving 200+ seniors over 300+ hours.",
         "Cold-emailed 20+ communities to land those partnerships.",
@@ -172,7 +174,7 @@ window.SITE = {
       ],
     },
     {
-      role: "Data Analytics Support Intern", org: "Duel On Jewel Inc.", icon: "📈", stat: "18%", statLabel: "sales growth", dates: "Mar – Sep 2025", place: "San Jose, CA",
+      role: "Data Analytics Support Intern", org: "Duel On Jewel Inc.", stat: "18%", statLabel: "sales growth", dates: "Mar – Sep 2025", place: "San Jose, CA",
       details: [
         "Drove 18% sales growth across optimized categories.",
         "Built a JavaScript scraper for 30+ Amazon listings, cutting research time 80%.",
@@ -182,8 +184,8 @@ window.SITE = {
   ],
 
   awards: [
-    "🥉 3rd Place, SJSU Cybersecurity & AI Hackathon (2025)",
-    "🌱 Top 10 Finalist, California Sunrise VentureSpark (2025)",
+    "3rd Place, SJSU Cybersecurity & AI Hackathon (2025)",
+    "Top 10 Finalist, California Sunrise VentureSpark (2025)",
   ],
 
   gallery: [
