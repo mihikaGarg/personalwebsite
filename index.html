@@ -469,7 +469,7 @@
     .cs-r { transform: translateX(calc(var(--s, 0) * 48vw)); color: #6d58c9; }
     #tiles { will-change: clip-path; }
     .love-stage { position: sticky; top: 92px; }
-    .love-spacer { height: 140vh; }
+    .love-spacer { height: 260vh; }
     #loves { padding-top: 40px; }
     .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
     /* photos wipe open as they arrive */
@@ -860,10 +860,8 @@
       const inner = i === a.length - 1 ? `<em>${esc(w)}</em>` : esc(w);
       return `<span class="w" style="animation-delay:${0.35 + i * 0.12}s">${inner}</span>`;
     }).join(" ");
-    const today = new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
     const textBlock = (top, title) => `
       <div class="hero-text" id="heroText">
-        <div class="cover-line"><span>${today}</span><span>Berkeley, Calif.</span><span>Price 25 cents</span></div>
         ${top}
         <h1>${words(title)}</h1>
         <a class="walk-cta" href="#about">get to know me <span class="arrow" aria-hidden="true">↓</span></a>
@@ -1086,8 +1084,9 @@
       const pin = $("lovePin").getBoundingClientRect();
       const t = tilesEl.getBoundingClientRect();
       if (pin.bottom > 0 && pin.top < vh * 1.2) {
-        const spacer = vh * 1.4;
-        const p = clamp01((92 - pin.top) / spacer);
+        const spacer = vh * 2.6;
+        const raw = clamp01((92 - pin.top) / spacer);
+        const p = clamp01((raw - 0.12) / 0.83);                          // short pause on the title, then open
         const e = p * p * (3 - 2 * p);                                     // smooth ease in and out
         const midY = (Math.max(t.top, 0) + Math.min(t.bottom, vh)) / 2;   // middle of the visible cards
         const cx = innerWidth / 2 - t.left, cy = midY - t.top;
@@ -1096,7 +1095,7 @@
         loveTitle.style.top = midY.toFixed(1) + "px";
         loveTitle.style.setProperty("--s", e.toFixed(3));
         const fadeIn = clamp01((vh * 0.9 - t.top) / (vh * 0.3));
-        loveTitle.style.setProperty("--o", (p < 1 ? fadeIn * (1 - clamp01((p - 0.35) / 0.4)) : 0).toFixed(3));
+        loveTitle.style.setProperty("--o", (p < 1 ? fadeIn * (1 - clamp01((p - 0.45) / 0.4)) : 0).toFixed(3));
       } else loveTitle.style.setProperty("--o", "0");
       for (const el of sceneBgs) {
         const rect = el.parentElement.getBoundingClientRect();
