@@ -34,9 +34,9 @@ window.SITE = {
   // Click any of these on the site to open its little story
   hobbies: [
     {
-      emoji: "🌊", title: "the beach", blurb: "sand, waves, sunsets",
+      emoji: "🌊", title: "the beach", blurb: "",
       cover: P("palm-beach.jpg"),
-      story: "My favorite place to be. Give me a sunset and some waves and I'm happy for hours.",
+      story: "",
       photos: [
         { src: P("me-beach-sunset.jpg"), caption: "" },
         { src: P("palm-beach.jpg"), caption: "" },
@@ -46,7 +46,7 @@ window.SITE = {
       ],
     },
     {
-      emoji: "🐶", title: "dogs", blurb: "especially this one",
+      emoji: "🐶", title: "dogs", blurb: "",
       cover: P("dog-3.jpg"),
       story: "",
       photos: [
@@ -57,10 +57,10 @@ window.SITE = {
       ],
     },
     {
-      emoji: "🎧", title: "music", blurb: "always something playing",
+      emoji: "🎧", title: "music", blurb: "",
       cover: P("concert.jpg"),
       collage: true,             // card shows a collage of the album covers below
-      story: "What's on my record shelf lately. Tap one to give it a spin.",
+      story: "",
       photos: [{ src: P("concert.jpg"), caption: "" }],
       vinyls: [
         { artist: "Olivia Dean", album: "The Art of Loving", tag: "on repeat", color: "#7fb3f0", cover: "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/08/e2/21/08e22164-7c0b-1522-818f-e0e74f62dc49/25UMGIM69703.rgb.jpg/600x600bb.jpg" },
@@ -72,9 +72,9 @@ window.SITE = {
       ],
     },
     {
-      emoji: "💛", title: "my people", blurb: "the best part of everything",
+      emoji: "💛", title: "my people", blurb: "",
       cover: P("friends-formal.jpg"),
-      story: "Brunches, late nights, and walks by the water with the people I love.",
+      story: "",
       photos: [
         { src: P("friends-formal.jpg"), caption: "" },
         { src: P("friend-marina.jpg"), caption: "" },
@@ -83,16 +83,16 @@ window.SITE = {
       ],
     },
     {
-      emoji: "☕", title: "coffee spots", blurb: "always hunting for a new one",
+      emoji: "☕", title: "coffee spots", blurb: "",
       cover: P("me-jungle.jpg"),
-      story: "Half hobby, half personality trait. I'm always on the hunt for a cozy new café to work from.",
+      story: "",
       photos: [],
       list: [],               // add favorite cafés here, e.g. "Café Name — what to order"
     },
     {
-      emoji: "🌲", title: "walks & hikes", blurb: "any trail, any view",
+      emoji: "🌲", title: "walks & hikes", blurb: "",
       cover: P("ocean-trees.jpg"),
-      story: "Walks are how I think, and hikes are how I reset. Bonus points if the trail ends at the water.",
+      story: "",
       photos: [
         { src: P("waterfall-jungle.jpg"), caption: "" },
         { src: P("ocean-trees.jpg"), caption: "" },
