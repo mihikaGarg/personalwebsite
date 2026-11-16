@@ -240,7 +240,18 @@ window.SITE = {
     { src: P("friend-dorm.jpg"), caption: "" },
     { src: P("beach-sunset.jpg"), caption: "" },
     { src: P("me-ftc.jpg"), caption: "" },
-    { src: P("ocean-trees-2.jpg"), caption: "" },
+    { src: P("friend-beach.jpg"), caption: "" },
+  ],
+
+  // the big photo grid under the camera: just a few, none that already show up elsewhere on the page
+  prints: [
+    { src: P("me-waterfall.jpg"), caption: "" },
+    { src: P("friends-group.jpg"), caption: "" },
+    { src: P("sticker-stand.jpg"), caption: "" },
+    { src: P("me-jungle.jpg"), caption: "" },
+    { src: P("friend-dorm.jpg"), caption: "" },
+    { src: P("waterfall-jungle.jpg"), caption: "" },
+    { src: P("me-ftc.jpg"), caption: "" },
     { src: P("friend-beach.jpg"), caption: "" },
   ],
 

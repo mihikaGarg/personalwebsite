@@ -823,7 +823,7 @@
   <section class="scene" id="projects">
     <div class="scene-bg" id="projectsBg"></div>
     <div class="inner">
-      <div class="heading reveal"><h2>projects</h2><p>Click any project for the full story.</p></div>
+      <div class="heading reveal"><h2>projects</h2></div>
       <div class="projects" id="projectsGrid"></div>
     </div>
   </section>
@@ -934,7 +934,7 @@
     </div>
   </div>
 
-  <script src="content.js?v=20261116k"></script>
+  <script src="content.js?v=20261116l"></script>
   <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
   <script>
     const S = window.SITE;
@@ -1081,7 +1081,7 @@
       galleryCols = n;
       const cols = Array.from({ length: n }, () => []);
       const heights = new Array(n).fill(0);
-      S.gallery.forEach((g, i) => {
+      S.prints.forEach((g, i) => {
         // drop each photo into the currently shortest column so the bottoms line up
         const k = heights.indexOf(Math.min(...heights));
         const name = g.src.split("/").pop().replace(/\.[^.]+$/, "");
@@ -1278,22 +1278,26 @@
 
     /* ================= camera roll ================= */
     const film = $("filmTrack");
-    const rollFrames = S.gallery.map((g, i) => `<button data-roll="${i}" aria-label="Open photo"><img src="${esc(g.src)}" alt="" loading="lazy"></button>`).join("");
+    // the film strip shows every photo on the site (camera roll + all the hobby popups), no repeats
+    const seen = new Set();
+    const ROLL = [...S.gallery, ...S.hobbies.flatMap((x) => x.photos || []), { src: S.about.photo }]
+      .filter((p) => p && p.src && !seen.has(p.src) && seen.add(p.src));
+    const rollFrames = ROLL.map((g, i) => `<button data-roll="${i}" aria-label="Open photo"><img src="${esc(g.src)}" alt="" loading="lazy"></button>`).join("");
     film.innerHTML = rollFrames + rollFrames;   // twice, so the loop is seamless
-    film.style.setProperty("--dur", S.gallery.length * 4 + "s");
-    film.addEventListener("click", (e) => { const b = e.target.closest("[data-roll]"); if (b) openLightbox(S.gallery, +b.dataset.roll); });
+    film.style.setProperty("--dur", ROLL.length * 4 + "s");
+    film.addEventListener("click", (e) => { const b = e.target.closest("[data-roll]"); if (b) openLightbox(ROLL, +b.dataset.roll); });
     const flashEl = document.createElement("div"); flashEl.className = "flash"; document.body.append(flashEl);
     const eject = $("eject");
     function snapPhoto() {
-      const i = Math.floor(Math.random() * S.gallery.length);
+      const i = Math.floor(Math.random() * ROLL.length);
       $("camera").classList.remove("snap"); void $("camera").offsetWidth; $("camera").classList.add("snap");
       flashEl.classList.remove("on"); void flashEl.offsetWidth; flashEl.classList.add("on");
       eject.querySelectorAll(".pola").forEach((p) => { p.classList.add("gone"); setTimeout(() => p.remove(), 800); });
       const p = document.createElement("button");
       p.className = "pola"; p.type = "button"; p.setAttribute("aria-label", "Open this photo");
       p.style.setProperty("--r", (Math.random() * 14 - 7).toFixed(1) + "deg");
-      p.innerHTML = `<img src="${esc(S.gallery[i].src)}" alt="">`;
-      p.addEventListener("click", () => openLightbox(S.gallery, i));
+      p.innerHTML = `<img src="${esc(ROLL[i].src)}" alt="">`;
+      p.addEventListener("click", () => openLightbox(ROLL, i));
       eject.append(p);
     }
     $("camera").addEventListener("click", snapPhoto);
@@ -1373,7 +1377,7 @@
       if (!t) return;
       if (t.dataset.hobby) openHobby(S.hobbies[+t.dataset.hobby]);
       else if (t.dataset.project) openProject(S.projects[+t.dataset.project]);
-      else if (t.dataset.shot) openLightbox(S.gallery, +t.dataset.shot);
+      else if (t.dataset.shot) openLightbox(S.prints, +t.dataset.shot);
       else {
         const stop = t.parentElement;
         const open = stop.classList.toggle("open");
