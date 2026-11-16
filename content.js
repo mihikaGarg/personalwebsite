@@ -50,10 +50,10 @@ window.SITE = {
       cover: P("dog-3.jpg"),
       story: "Meet my best friend. (He's also the little guy following you around this site.)",
       photos: [
-        { src: P("dog-me.jpg"), caption: "best buds" },
-        { src: P("dog-1.jpg"), caption: "the model pose" },
-        { src: P("dog-3.jpg"), caption: "living his best lamb life" },
-        { src: P("dog-selfie.jpg"), caption: "matching filters" },
+        { src: P("dog-me.jpg"), caption: "" },
+        { src: P("dog-1.jpg"), caption: "" },
+        { src: P("dog-3.jpg"), caption: "" },
+        { src: P("dog-selfie.jpg"), caption: "" },
       ],
     },
     {
@@ -195,7 +195,7 @@ window.SITE = {
     { src: P("friend-marina.jpg"), caption: "marina sunsets" },
     { src: P("beach-horses.jpg"), caption: "" },
     { src: P("me-waterfall.jpg"), caption: "" },
-    { src: P("dog-me.jpg"), caption: "best buds" },
+    { src: P("dog-me.jpg"), caption: "" },
     { src: P("palm-beach.jpg"), caption: "" },
     { src: P("friend-brunch.jpg"), caption: "brunch club" },
     { src: P("me-jungle.jpg"), caption: "" },
