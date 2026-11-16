@@ -322,16 +322,16 @@
     .trail svg.path path { fill: none; stroke: var(--sage); stroke-width: 2; stroke-dasharray: 2 9; stroke-linecap: round; }
     .stop { position: relative; margin-bottom: 18px; transition: transform .35s cubic-bezier(.2, .8, .2, 1), box-shadow .35s; }
     .stop:hover { transform: translateX(6px); }
-    .stop.open { box-shadow: inset 4px 0 0 #f0a594, 0 18px 40px rgba(90, 120, 170, .18); }
+    .stop.open { box-shadow: inset 4px 0 0 #6d58c9, 0 18px 40px rgba(90, 120, 170, .18); }
     .badge {
       position: absolute; left: -52px; top: 27px; width: 18px; height: 18px; border-radius: 50%;
-      background: linear-gradient(135deg, #f6b8a8, #f3d58a); box-shadow: 0 0 0 5px rgba(246, 184, 168, .25), 0 4px 10px rgba(200, 140, 120, .25);
+      background: linear-gradient(135deg, #2c3a6e, #8a6fe0); box-shadow: 0 0 0 5px rgba(138, 111, 224, .22), 0 4px 10px rgba(44, 58, 110, .3);
       transition: transform .4s cubic-bezier(.3, 1.6, .5, 1);
     }
     .stop:hover .badge, .stop.open .badge { transform: scale(1.25); }
     .stat { flex-shrink: 0; text-align: right; margin-left: auto; padding-top: 2px; }
     .stat b { display: block; font-family: var(--serif); font-size: 30px; line-height: 1; font-weight: 600;
-      background: linear-gradient(135deg, #e88b7a, #d9a64a); -webkit-background-clip: text; background-clip: text; color: transparent; }
+      background: linear-gradient(135deg, #24305e, #7b5fd6); -webkit-background-clip: text; background-clip: text; color: transparent; }
     .stat span { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--cream-soft); }
     @media (max-width: 560px) { .stat { display: none; } }
     .stop-btn {
@@ -340,7 +340,11 @@
     }
     .stop-btn .dates { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--cream-soft); }
     .stop-btn h3 { font-size: 24px; margin: 4px 0 2px; }
-    .stop-btn .org { color: var(--gold); }
+    .stop-btn .org { color: #6d58c9; }
+    #journey .edu .deg { color: #6d58c9; }
+    #journey .trail svg.path path { stroke: #7b6bc4; }
+    #journey .heading h2 em { color: #6d58c9; }
+    #journey .heading .caps { color: #2c3a6e; }
     .plus { flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--line); display: grid; place-items: center; transition: transform .4s; margin-top: 4px; }
     .stop.open .plus { transform: rotate(45deg); }
     .stop-details { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .5s cubic-bezier(.2, .8, .2, 1); }
@@ -349,13 +353,13 @@
     .stop-details ul { margin: 0; padding: 0 24px 22px 44px; color: var(--cream-soft); }
     .stop-details li { margin-bottom: 6px; }
     .edu { position: relative; overflow: hidden; max-width: 760px; margin: 0 auto 34px; padding: 26px 28px; display: flex; gap: 20px; align-items: flex-start;
-      background: linear-gradient(135deg, rgba(255, 228, 214, .75), rgba(255, 255, 255, .7) 55%, rgba(255, 240, 200, .7)); }
+      background: linear-gradient(135deg, rgba(222, 214, 252, .85), rgba(255, 255, 255, .7) 55%, rgba(204, 216, 246, .85)); }
     .edu::after { content: ""; position: absolute; right: -60px; top: -60px; width: 200px; height: 200px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(246, 184, 168, .4), transparent 70%); pointer-events: none; }
+      background: radial-gradient(circle, rgba(138, 111, 224, .35), transparent 70%); pointer-events: none; }
     .edu .cap { width: 56px; height: 56px; border-radius: 18px; display: grid; place-items: center; font-size: 28px; flex-shrink: 0;
       background: #fff; box-shadow: 0 8px 18px rgba(90, 120, 170, .22); transform: rotate(-6deg); }
     .edu .now-pill { display: inline-block; margin-left: 8px; padding: 2px 9px; border-radius: 999px; font-size: 10px; letter-spacing: .12em;
-      background: linear-gradient(135deg, #f4a99a, #f3c77a); color: #fff; vertical-align: 2px; }
+      background: linear-gradient(135deg, #2c3a6e, #8a6fe0); color: #fff; vertical-align: 2px; }
     .edu .dates { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--cream-soft); }
     .edu h3 { font-size: 26px; margin: 4px 0 2px; }
     .edu .deg { color: var(--gold); font-weight: 500; }
@@ -743,7 +747,7 @@
     /* ================= scroll-driven world ================= */
     const skyStops = [
       [0.00, [234, 243, 255]],  // baby blue
-      [0.20, [253, 246, 236]],  // cream
+      [0.20, [236, 234, 252]],  // lavender (journey)
       [0.40, [255, 238, 233]],  // blush
       [0.60, [255, 246, 226]],  // butter
       [0.80, [241, 236, 252]],  // lilac
