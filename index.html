@@ -381,7 +381,9 @@
     .awards span { padding: 8px 16px; border-radius: 999px; }
 
     /* photos */
-    .masonry { columns: 4 220px; column-gap: 14px; }
+    .masonry { display: flex; gap: 14px; align-items: flex-start; }
+    .mcol { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 14px; }
+    .mcol .shot { margin: 0 !important; }
     .shot {
       break-inside: avoid; margin: 0 0 14px; border-radius: 14px; border: 3px solid #fff !important; box-shadow: 0 10px 24px rgba(100, 140, 200, .18); overflow: hidden; cursor: zoom-in;
       position: relative; border: 0; padding: 0; background: none; width: 100%; display: block;
@@ -679,7 +681,7 @@
     </div>
   </div>
 
-  <script src="content.js?v=20261116d"></script>
+  <script src="content.js?v=20261116e"></script>
   <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
   <script>
     const S = window.SITE;
@@ -793,11 +795,22 @@
       </div>`).join("");
     $("awards").innerHTML = S.awards.map((a) => `<span class="glass reveal">${esc(a)}</span>`).join("");
 
-    $("masonry").innerHTML = S.gallery.map((g, i) => `
-      <button class="shot reveal" data-shot="${i}" aria-label="Open photo">
-        <img src="${esc(g.src)}" alt="${esc(g.caption || "photo")}" loading="lazy">
-        ${g.caption ? `<span class="cap">${esc(g.caption)}</span>` : ""}
-      </button>`).join("");
+    // photos fill row by row (left to right), so the order in content.js is the order you see
+    let galleryCols = 0;
+    function renderGallery(revealed) {
+      const n = innerWidth >= 1000 ? 4 : innerWidth >= 700 ? 3 : 2;
+      if (n === galleryCols) return;
+      galleryCols = n;
+      const cols = Array.from({ length: n }, () => []);
+      S.gallery.forEach((g, i) => cols[i % n].push(`
+        <button class="shot reveal${revealed ? " in" : ""}" data-shot="${i}" aria-label="Open photo">
+          <img src="${esc(g.src)}" alt="${esc(g.caption || "photo")}" loading="lazy">
+          ${g.caption ? `<span class="cap">${esc(g.caption)}</span>` : ""}
+        </button>`));
+      $("masonry").innerHTML = cols.map((c) => `<div class="mcol">${c.join("")}</div>`).join("");
+    }
+    renderGallery(false);
+    addEventListener("resize", () => renderGallery(true));
 
     bg($("contactBg"), S.contact.bg);
     $("contactBlurb").textContent = S.contact.blurb;
