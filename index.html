@@ -459,18 +459,16 @@
     .intro .hero { position: sticky; top: 0; z-index: 0; transform-origin: 50% 30%; will-change: transform, filter; }
     #about { z-index: 2; background: var(--sky); border-radius: 44px 44px 0 0; box-shadow: 0 -24px 60px rgba(60, 80, 130, .14); }
     @media (max-width: 700px) { #about { border-radius: 28px 28px 0 0; } }
-    /* pinned circle reveal */
-    .circle-scene { position: relative; height: 230vh; }
-    .cs-stage { position: sticky; top: 0; height: 100vh; overflow: hidden; display: grid; place-items: center; }
-    .cs-photo { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: repeat(3, minmax(0, 1fr)); gap: 10px; background: #fff;
-      clip-path: circle(var(--r, 9%) at 50% 50%); transform: scale(var(--z, 1.18)); will-change: clip-path, transform; }
-    .cs-text { position: relative; z-index: 2; display: flex; gap: .28em; font-family: var(--serif); font-size: clamp(52px, 11vw, 168px);
-      line-height: 1; letter-spacing: -.02em; pointer-events: none; opacity: var(--o, 1); }
-    .cs-photo img { width: 100%; height: 100%; min-height: 0; object-fit: cover; display: block; }
-    .cs-text { margin: 0; font-weight: 400; }
-    .cs-text span { text-shadow: 0 2px 30px rgba(255, 255, 255, .55); }
-    .cs-l { transform: translateX(calc(var(--s, 0) * -45vw)); }
-    .cs-r { transform: translateX(calc(var(--s, 0) * 45vw)); color: #6d58c9; }
+    /* things i love: the cards open up through a growing circle */
+    #loves { overflow: clip; }
+    .love-title .cs-text { position: fixed; left: 0; right: 0; top: 50%; z-index: 40; pointer-events: none; transform: translateY(-50%); justify-content: center; opacity: var(--o, 0); }
+    .cs-text { display: flex; gap: .28em; font-family: var(--serif); font-size: clamp(52px, 11vw, 168px);
+      line-height: 1; letter-spacing: -.02em; opacity: var(--o, 1); }
+    .cs-text span { text-shadow: 0 2px 30px rgba(255, 255, 255, .7); }
+    .cs-l { transform: translateX(calc(var(--s, 0) * -48vw)); }
+    .cs-r { transform: translateX(calc(var(--s, 0) * 48vw)); color: #6d58c9; }
+    #tiles { will-change: clip-path; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
     /* photos wipe open as they arrive */
     .shot.reveal, .tile.reveal { opacity: 1; transform: none; clip-path: inset(22% 0 0 0 round 18px);
       transition: clip-path 1.1s cubic-bezier(.2, .8, .2, 1); }
@@ -478,8 +476,7 @@
     .shot.reveal img, .tile.reveal > img { transform: scale(1.18); transition: transform 1.5s cubic-bezier(.2, .8, .2, 1); }
     .shot.reveal.in img, .tile.reveal.in > img { transform: none; }
     @media (prefers-reduced-motion: reduce) {
-      .split .ch { --k: 1; } .circle-scene { height: auto; } .cs-stage { position: relative; height: 70vh; }
-      .cs-photo { clip-path: none; transform: none; } .cs-text { display: none; }
+      .split .ch { --k: 1; } .love-title { display: none; }
       .shot.reveal, .tile.reveal { clip-path: none; } .shot.reveal img, .tile.reveal > img { transform: none; }
     }
 
@@ -626,16 +623,10 @@
     </div>
   </section>
 
-  <section class="circle-scene" id="offline">
-    <div class="cs-stage" id="csStage">
-      <div class="cs-photo" id="csMosaic"></div>
-      <h2 class="cs-text"><span class="cs-l">things i</span><span class="cs-r"><em>love</em></span></h2>
-    </div>
-  </section>
-
   <section class="scene" id="loves">
+    <div class="love-title" aria-hidden="true"><div class="cs-text" id="loveTitle"><span class="cs-l">things i</span><span class="cs-r"><em>love</em></span></div></div>
     <div class="inner">
-      <div class="heading reveal"><div class="caps">04 — off the clock</div><p>Tap one to step inside.</p></div>
+      <div class="heading reveal"><div class="caps">04 — off the clock</div><h2 class="sr-only">things i love</h2><p>Tap one to step inside.</p></div>
       <div class="tiles" id="tiles"></div>
     </div>
   </section>
@@ -707,7 +698,7 @@
     </div>
   </div>
 
-  <script src="content.js?v=20261116g"></script>
+  <script src="content.js?v=20261116h"></script>
   <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
   <script>
     const S = window.SITE;
@@ -916,9 +907,7 @@
     splits.forEach(splitChars);
 
     const heroEl = $("top");
-    const csScene = $("offline"), csStage = $("csStage");
-    $("csMosaic").innerHTML = ["palm-beach", "friends-formal", "drink-matcha", "ski-chairlift", "dog-3", "concert", "ocean-trees", "friends-group", "coffee-bagel"]
-      .map((f) => `<img src="photos/${f}.jpg" alt="" loading="lazy">`).join("");
+    const tilesEl = $("tiles"), loveTitle = $("loveTitle");
     const clamp01 = (v) => Math.min(1, Math.max(0, v));
 
     function motion(vh) {
@@ -938,15 +927,19 @@
         if (booth) booth.style.transform = `rotate(${(p * 10).toFixed(2)}deg) translate(${(p * 8).toFixed(2)}%, ${(p * -10).toFixed(2)}%)`;
         $("about").style.borderRadius = `${(44 * (1 - p * 0.6)).toFixed(1)}px ${(44 * (1 - p * 0.6)).toFixed(1)}px 0 0`;
       }
-      const cs = csScene.getBoundingClientRect();
-      if (cs.bottom > 0 && cs.top < vh) {
-        const p = clamp01(-cs.top / (cs.height - vh));
+      // things i love: a circle opens in the middle of the cards and grows until they all show
+      const t = tilesEl.getBoundingClientRect();
+      if (t.bottom > 0 && t.top < vh * 1.2) {
+        const p = clamp01((vh * 0.9 - t.top) / vh);
         const e = 1 - Math.pow(1 - p, 2);
-        csStage.style.setProperty("--r", (9 + e * 66).toFixed(2) + "%");
-        csStage.style.setProperty("--z", (1.18 - e * 0.18).toFixed(3));
-        csStage.style.setProperty("--s", e.toFixed(3));
-        csStage.style.setProperty("--o", (1 - clamp01((p - 0.35) / 0.4)).toFixed(3));
-      }
+        const midY = (Math.max(t.top, 0) + Math.min(t.bottom, vh)) / 2;   // middle of the visible cards
+        const cx = innerWidth / 2 - t.left, cy = midY - t.top;
+        const rMax = Math.hypot(Math.max(cx, t.width - cx), Math.max(cy, t.height - cy));
+        tilesEl.style.clipPath = p >= 1 ? "none" : `circle(${(e * rMax).toFixed(1)}px at ${cx.toFixed(1)}px ${cy.toFixed(1)}px)`;
+        loveTitle.style.top = midY.toFixed(1) + "px";
+        loveTitle.style.setProperty("--s", e.toFixed(3));
+        loveTitle.style.setProperty("--o", (t.top < vh && p < 1 ? 1 - clamp01((p - 0.2) / 0.5) : 0).toFixed(3));
+      } else loveTitle.style.setProperty("--o", "0");
       for (const el of sceneBgs) {
         const rect = el.parentElement.getBoundingClientRect();
         if (rect.bottom < 0 || rect.top > vh) continue;

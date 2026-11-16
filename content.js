@@ -238,7 +238,6 @@ window.SITE = {
     { src: P("sticker-stand.jpg"), caption: "" },
     { src: P("waterfall-jungle.jpg"), caption: "" },
     { src: P("friend-dorm.jpg"), caption: "" },
-    { src: P("me-balloons.jpg"), caption: "" },
     { src: P("beach-sunset.jpg"), caption: "" },
     { src: P("me-ftc.jpg"), caption: "" },
     { src: P("ocean-trees-2.jpg"), caption: "" },
