@@ -837,7 +837,7 @@
         ${ph.caption ? `<span class="cap">${esc(ph.caption)}</span>` : ""}</button>`).join("")}</div>`;
     }
     function openHobby(h) {
-      let html = `<div class="emoji">${esc(h.emoji)}</div><h3>${esc(h.title)}</h3><p>${esc(h.story)}</p>`;
+      let html = `<div class="emoji">${esc(h.emoji)}</div><h3>${esc(h.title)}</h3>${h.story ? `<p>${esc(h.story)}</p>` : ""}`;
       if (h.vinyls) {
         html += `<div class="crate">${h.vinyls.map((v, i) => `
           <button class="vinyl" data-vinyl="${i}" style="--sl:${v.color};--lab:${v.color}" aria-label="Play ${esc(v.artist)}">
