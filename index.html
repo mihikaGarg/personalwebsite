@@ -543,7 +543,7 @@
     .lb-close { position: fixed; top: 18px; right: 18px; }
 
     /* ---------- the dog ---------- */
-    #dog { position: fixed; bottom: 10px; left: 16px; z-index: 40; width: 96px; cursor: pointer; will-change: left; }
+    #dog { position: fixed; bottom: 10px; left: 16px; z-index: 40; width: 108px; cursor: pointer; will-change: left; }
     #dog .flip { transition: transform .3s; }
     #dog.left .flip { transform: scaleX(-1); }
     #dog svg { width: 100%; overflow: visible; filter: drop-shadow(0 6px 8px rgba(90, 120, 170, .35)); }
@@ -554,6 +554,14 @@
     #dog .tail { transform-box: fill-box; transform-origin: 100% 100%; animation: wag .5s ease-in-out infinite alternate; }
     #dog.happy .tail { animation-duration: .12s; }
     #dog .tongue { opacity: 0; transition: opacity .2s; }
+    #dog .eyes { transform-box: fill-box; transform-origin: 50% 50%; animation: blink 4.8s infinite; }
+    @keyframes blink { 0%, 93%, 100% { transform: scaleY(1); } 96% { transform: scaleY(.08); } }
+    #dog .ear { transform-box: fill-box; transform-origin: 50% 0; }
+    #dog.walking .ear-l { animation: flop .32s ease-in-out infinite alternate; }
+    #dog.walking .ear-r { animation: flop .32s ease-in-out infinite alternate-reverse; }
+    #dog.happy .ear-l, #dog.happy .ear-r { animation: flop .14s ease-in-out infinite alternate; }
+    @keyframes flop { from { transform: rotate(-6deg); } to { transform: rotate(8deg); } }
+    #dog:hover .flip { transform: translateY(-3px); } #dog.left:hover .flip { transform: scaleX(-1) translateY(-3px); }
     #dog.happy .tongue, #dog.walking .tongue { opacity: 1; }
     @keyframes step { from { rotate: -24deg; } to { rotate: 24deg; } }
     @keyframes bob { to { transform: translateY(-2px); } }
@@ -578,7 +586,7 @@
       .polaroid { max-width: 300px; margin: 0 auto; }
       .tile { height: 280px; }
       .scene { padding-top: 100px; padding-bottom: 100px; }
-      #dog { width: 70px; }
+      #dog { width: 80px; }
       .lb-btn { top: auto; bottom: 20px; margin-top: 0; }
       .lb-close { top: 14px; bottom: auto; }
       .nav-links a { padding: 6px 9px; font-size: 14px; }
@@ -905,32 +913,49 @@
     <div class="flip">
       <svg viewBox="0 0 130 92" aria-hidden="true">
         <g class="legs-back">
-          <rect class="leg leg-b" x="30" y="54" width="9" height="28" rx="4.5" fill="#e6e0d6" />
-          <rect class="leg leg-a" x="76" y="54" width="9" height="28" rx="4.5" fill="#e6e0d6" />
-        </g>
-        <g class="bod">
-          <path class="tail" d="M24 44 C 14 40, 10 30, 14 20 C 17 28, 20 34, 28 38 Z" fill="#fff" stroke="#c3cbd9" stroke-width="1.5" />
-          <ellipse cx="56" cy="47" rx="34" ry="17" fill="#fff" stroke="#c3cbd9" stroke-width="1.5" />
-          <path d="M34 36 l3 -5 l2 5 M46 32 l3 -5 l2 5 M60 31 l3 -5 l2 5 M72 33 l3 -5 l2 5" stroke="#c3cbd9" stroke-width="1.4" fill="none" stroke-linecap="round" />
-          <circle cx="94" cy="32" r="18" fill="#fff" stroke="#c3cbd9" stroke-width="1.5" />
-          <path d="M84 16 l2 -6 l3 6 M92 14 l3 -6 l2 6" stroke="#c3cbd9" stroke-width="1.4" fill="none" stroke-linecap="round" />
-          <ellipse cx="109" cy="39" rx="10" ry="8" fill="#fff" stroke="#c3cbd9" stroke-width="1.5" />
-          <path class="tongue" d="M108 46 q3 8 7 0 z" fill="#f28b9b" />
-          <ellipse cx="117" cy="36" rx="4" ry="3.3" fill="#2a2420" />
-          <circle cx="100" cy="28" r="2.8" fill="#2a2420" />
-          <circle cx="101" cy="27" r=".9" fill="#fff" />
-          <path d="M80 22 C 72 22, 70 36, 76 44 C 82 40, 86 30, 84 22 Z" fill="#f1e3cc" stroke="#c3cbd9" stroke-width="1.2" />
-          <path d="M76 44 C 74 40, 74 36, 76 33 C 79 36, 79 40, 76 44 Z" fill="#d9a86c" />
+          <rect class="leg leg-b" x="26" y="64" width="12" height="22" rx="6" fill="#e9e2d8" />
+          <rect class="leg leg-a" x="64" y="64" width="12" height="22" rx="6" fill="#e9e2d8" />
         </g>
         <g>
-          <rect class="leg leg-a" x="38" y="56" width="9" height="28" rx="4.5" fill="#fff" stroke="#c3cbd9" stroke-width="1.2" />
-          <rect class="leg leg-b" x="84" y="56" width="9" height="28" rx="4.5" fill="#fff" stroke="#c3cbd9" stroke-width="1.2" />
+          <rect class="leg leg-a" x="36" y="66" width="12" height="20" rx="6" fill="#fff" stroke="#c3cbd9" stroke-width="1.4" />
+          <rect class="leg leg-b" x="74" y="66" width="12" height="20" rx="6" fill="#fff" stroke="#c3cbd9" stroke-width="1.4" />
+          <path d="M39 83v3M43 83v3M77 83v3M81 83v3" stroke="#e9aebd" stroke-width="1.3" stroke-linecap="round" />
+        </g>
+        <g class="bod">
+          <path class="tail" d="M30 62 C 12 64, 4 48, 12 34 C 17 43, 24 47, 33 49 Z" fill="#fff" stroke="#c3cbd9" stroke-width="1.5" stroke-linejoin="round" />
+          <ellipse cx="52" cy="59" rx="31" ry="19" fill="#fff" stroke="#c3cbd9" stroke-width="1.5" />
+          <path d="M34 43 q4 -6 8 0 q4 -6 8 0 q4 -6 8 0 q4 -6 8 0" stroke="#c3cbd9" stroke-width="1.4" fill="none" stroke-linecap="round" />
+          <!-- far ear, behind the head -->
+          <path class="ear ear-l" d="M72 20 C 58 16, 52 34, 60 50 C 70 48, 76 36, 76 24 Z" fill="#e7c697" stroke="#c9a272" stroke-width="1.3" stroke-linejoin="round" />
+          <circle cx="92" cy="38" r="25" fill="#fff" stroke="#c3cbd9" stroke-width="1.5" />
+          <path d="M82 14 q3 -7 6 -1 q3 -7 6 -1 q3 -6 6 1" stroke="#c3cbd9" stroke-width="1.4" fill="none" stroke-linecap="round" />
+          <!-- near ear -->
+          <path class="ear ear-r" d="M110 18 C 124 16, 130 34, 122 50 C 112 48, 108 36, 108 24 Z" fill="#e7c697" stroke="#c9a272" stroke-width="1.3" stroke-linejoin="round" />
+          <path d="M114 28 C 120 32, 120 40, 117 46" stroke="#d4ad7c" stroke-width="1.2" fill="none" stroke-linecap="round" />
+          <!-- big sparkly eyes -->
+          <g class="eyes">
+            <ellipse cx="82" cy="37" rx="5" ry="5.8" fill="#2a2420" />
+            <ellipse cx="102" cy="37" rx="5" ry="5.8" fill="#2a2420" />
+            <circle cx="83.8" cy="34.6" r="1.9" fill="#fff" /><circle cx="81" cy="39.6" r="1" fill="#fff" />
+            <circle cx="103.8" cy="34.6" r="1.9" fill="#fff" /><circle cx="101" cy="39.6" r="1" fill="#fff" />
+          </g>
+          <ellipse cx="73" cy="47" rx="5" ry="3" fill="#f7a9bb" opacity=".65" />
+          <ellipse cx="111" cy="47" rx="5" ry="3" fill="#f7a9bb" opacity=".65" />
+          <!-- muzzle -->
+          <ellipse cx="92" cy="48.5" rx="9.5" ry="7" fill="#fff" stroke="#e1e5ee" stroke-width="1.2" />
+          <ellipse cx="92" cy="45" rx="3.6" ry="2.6" fill="#2a2420" />
+          <ellipse cx="91" cy="44.2" rx="1.1" ry=".7" fill="#fff" opacity=".8" />
+          <path d="M92 47.4 v2.6 M92 50 q-3.4 3 -6.4 .2 M92 50 q3.4 3 6.4 .2" stroke="#2a2420" stroke-width="1.3" fill="none" stroke-linecap="round" />
+          <path class="tongue" d="M90 52.5 q2.2 7 4.6 0 z" fill="#f28b9b" />
+          <!-- collar with a heart tag -->
+          <path d="M71 57 Q 92 72 113 57" stroke="#f28ba5" stroke-width="5" fill="none" stroke-linecap="round" />
+          <path d="M92 76 C 85.5 71.5, 84.5 66, 88 65 C 90.2 64.4, 91.6 66, 92 67 C 92.4 66, 93.8 64.4, 96 65 C 99.5 66, 98.5 71.5, 92 76 Z" fill="#f4688d" stroke="#fff" stroke-width="1.2" />
         </g>
       </svg>
     </div>
   </div>
 
-  <script src="content.js?v=20261116n"></script>
+  <script src="content.js?v=20261116o"></script>
   <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
   <script>
     const S = window.SITE;
