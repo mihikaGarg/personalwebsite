@@ -228,6 +228,13 @@ window.SITE = {
     },
   ],
 
+  // from the resume
+  skills: [
+    { label: "Languages", items: ["Python", "SQL", "JavaScript", "TypeScript", "Java", "C/C++", "HTML/CSS"] },
+    { label: "Frameworks & libraries", items: ["pandas", "NumPy", "Matplotlib", "TensorFlow", "Keras", "FastAPI", "Pydantic", "Next.js", "pytest"] },
+    { label: "AI & developer tools", items: ["Claude API", "OpenAI API", "Web Speech API", "Claude Code", "ChatGPT", "Git/GitHub", "Jupyter", "VS Code"] },
+  ],
+
   awards: [
     "3rd Place, SJSU Cybersecurity & AI Hackathon (2025)",
     "Top 10 Finalist, California Sunrise VentureSpark (2025)",
