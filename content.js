@@ -138,6 +138,18 @@ window.SITE = {
 
   projects: [
     {
+      emoji: "🗣️", title: "speak-easy", year: "2026",
+      blurb: "A news app where AI agrees with you and people make you think. Pull up a chair at a table with people who see it differently.",
+      tags: ["Expo", "Convex", "OpenAI", "Supermemory", "Keiki"],
+      link: "https://github.com/eshajrv/ConsumerDebateNews",
+      details: [
+        "Built in one day at the YC Consumer Mobile Hackathon with Convex, Capy, Revyl, Supermemory, and Keiki.",
+        "Every morning it gives you four news stories: one everyone shares, two you want to learn about, and one you'd never pick yourself. You share your take, then join a live 5-minute chat with people who see it differently.",
+        "An AI host keeps the table fair: it opens with common ground, nudges quiet people, and flags personal attacks. You're scored on how well you understood someone, not on winning.",
+        "Supermemory remembers how each person listens and how their views move, then writes a personal insight and reshapes your next feed. The headline metric is the percent of people whose view moved 10+ points.",
+      ],
+    },
+    {
       emoji: "🧾", title: "Fineprint", year: "2026",
       blurb: "Turns grant PDFs into enforceable spend rules tied to their exact clauses.",
       tags: ["Python", "FastAPI", "Claude API", "Next.js"],
