@@ -352,7 +352,7 @@
     .sk-label { white-space: nowrap; font-family: var(--serif); font-style: italic; font-size: 20px; color: var(--cream-soft); font-variation-settings: "SOFT" 100, "WONK" 1; }
     .sk-items { display: flex; flex-wrap: wrap; gap: 8px; }
     .sk-items .tag { font-size: 15px; padding: 3px 12px; transition: transform .25s cubic-bezier(.3, 1.6, .5, 1), background .25s; }
-    .sk-items .tag:hover { transform: translateY(-2px) rotate(-1.5deg); background: rgba(247, 205, 218, .55); }
+    .sk-items .tag:hover { transform: translateY(-2px) rotate(-1.5deg); background: rgba(249,200,212, .55); }
     @media (max-width: 700px) { .sk-group { grid-template-columns: 1fr; gap: 6px; } .sk-label { white-space: normal; } }
     .aw-row { display: grid; grid-template-columns: 34px 220px 1fr auto; align-items: center; gap: 16px; padding: 14px 18px; margin: 0 -18px;
       border-bottom: 1px solid var(--line); border-radius: 0; transition: background .3s, border-radius .3s; }
@@ -661,10 +661,10 @@
       --ink: #3b4460;
       --cream: #3b4460;
       --cream-soft: rgba(52, 57, 74, .72);
-      --gold: #6e96c8;          /* watercolor blue for italic accents */
-      --rose: #f4bccb;
-      --butter: #f7d3dc;
-      --sky-wash: #bcd5ef;
+      --gold: #5b8fc7;          /* watercolor blue for italic accents */
+      --rose: #f3b3c1;
+      --butter: #f9d0da;
+      --sky-wash: #a6c8ea;
       --sage-wash: #a9c2a0;
       --sage: #7d8f9e;
       --line: rgba(52, 57, 74, .22);
@@ -692,9 +692,9 @@
       filter: saturate(.9) sepia(.04) contrast(.93) brightness(1.06);
     }
     /* background photos look painted */
-    .scene-bg { filter: saturate(.7) sepia(.05) brightness(1.12) contrast(.84) blur(1.2px); }
-    .scene-bg::after { background: linear-gradient(var(--sky) 0%, rgba(251,248,250, .58) 22%, rgba(251,248,250, .58) 78%, var(--sky) 100%); }
-    .contact .scene-bg::after { background: linear-gradient(var(--sky) 0%, rgba(251,248,250, .62) 25%, rgba(251,248,250, .58) 75%, var(--sky) 100%); }
+    .scene-bg { filter: saturate(.5) brightness(1.24) contrast(.74) blur(1.4px); }
+    .scene-bg::after { background: linear-gradient(var(--sky) 0%, rgba(208, 228, 249, .74) 24%, rgba(251, 226, 233, .66) 76%, var(--sky) 100%); }
+    .contact .scene-bg::after { background: linear-gradient(var(--sky) 0%, rgba(251, 226, 233, .68) 25%, rgba(208, 228, 249, .66) 75%, var(--sky) 100%); }
 
     /* watercolor washes behind sections */
     .wash { position: absolute; z-index: 0; pointer-events: none; border-radius: 50%; filter: url(#wc-edge) blur(6px); opacity: .85; }
@@ -724,30 +724,35 @@
     .walk-cta::before { display: none; }
     .walk-cta .arrow { background: var(--paper); color: var(--ink); border: 1.5px solid var(--ink); }
     .booth-card { background: var(--paper); border: 1px solid rgba(52, 57, 74, .35); box-shadow: 6px 8px 0 rgba(52, 57, 74, .12); border-radius: 3px; }
-    .booth-card::before, .polaroid::before { background: rgba(247,205,218, .75); }
+    .booth-card::before, .polaroid::before { background: rgba(249,200,212, .75); }
     .polaroid { background: var(--paper); border: 1px solid rgba(52, 57, 74, .3); box-shadow: 8px 10px 0 rgba(52, 57, 74, .12); }
 
     /* about */
     #about { background: var(--sky); box-shadow: 0 -1px 0 rgba(52, 57, 74, .35), 0 -20px 50px rgba(120, 130, 180, .10); }
 
     /* right-now cards: paper with a wash of color */
-    .np-card { background: radial-gradient(120% 90% at 10% 10%, rgba(242,178,196, .35), transparent 60%), var(--paper);
+    .np-card { background: radial-gradient(120% 90% at 10% 10%, rgba(245,170,188, .35), transparent 60%), var(--paper);
       border: 1.5px solid rgba(52, 57, 74, .55); border-radius: var(--hand-box); box-shadow: 4px 5px 0 rgba(52, 57, 74, .10); }
-    .build-card { background: radial-gradient(120% 90% at 90% 10%, rgba(247,205,218, .45), transparent 60%), var(--paper); }
+    .build-card { background: radial-gradient(120% 90% at 90% 10%, rgba(249,200,212, .45), transparent 60%), var(--paper); }
     .np-pill { background: var(--ink); color: var(--paper); border-radius: 10px 3px 9px 4px / 4px 9px 3px 10px; }
     .np-dots i { background: rgba(52, 57, 74, .25); } .np-dots i.on { background: var(--ink); }
     .check.done .tick { background: var(--ink); border-color: var(--ink); } .tick { border-color: rgba(52, 57, 74, .5); }
 
     /* journey: ink-ruled list */
     #journey .heading h2 em, .xp-org, #journey .heading .caps { color: var(--gold); }
+    /* a little extra sail-blue and hydrangea pink, like the reference covers */
+    .heading h2 em, .cs-r { color: #5b8fc7 !important; }
+    .xp-org { color: #4f84c0; }
+    .nav-links a:hover { text-decoration-color: #f3b3c1; }
+    ::selection { background: rgba(249, 200, 212, .7); }
     .xp, .xp-row { border-color: rgba(52, 57, 74, .3); }
     .xp-what li::marker { color: var(--rose); }
     .xp:hover .xp-row:hover { background: rgba(255, 255, 255, .9); }
 
     /* projects: each card gets its own watercolor wash */
-    .project:nth-child(3n+1) { background: radial-gradient(110% 80% at 15% 0%, rgba(247,205,218, .55), transparent 65%), var(--paper); }
-    .project:nth-child(3n+2) { background: radial-gradient(110% 80% at 85% 0%, rgba(242,178,196, .5), transparent 65%), var(--paper); }
-    .project:nth-child(3n+3) { background: radial-gradient(110% 80% at 50% 0%, rgba(176,207,238, .55), transparent 65%), var(--paper); }
+    .project:nth-child(3n+1) { background: radial-gradient(110% 80% at 15% 0%, rgba(249,200,212, .55), transparent 65%), var(--paper); }
+    .project:nth-child(3n+2) { background: radial-gradient(110% 80% at 85% 0%, rgba(245,170,188, .5), transparent 65%), var(--paper); }
+    .project:nth-child(3n+3) { background: radial-gradient(110% 80% at 50% 0%, rgba(150,194,236, .55), transparent 65%), var(--paper); }
     .project:nth-child(n) .more { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
 
     /* hobby cards and photos: paper mats with a thin ink edge */
@@ -767,15 +772,15 @@
     /* contact */
     .btn { border: 1.5px solid var(--ink); border-radius: 30px 10px 28px 12px / 12px 28px 10px 30px; font-family: var(--sans); font-size: 18px; }
     .btn.primary { background: var(--rose); color: var(--ink); border-color: var(--ink); box-shadow: 4px 4px 0 var(--ink); }
-    .btn.primary:hover { background: #f7cbd6; }
+    .btn.primary:hover { background: #f6c3cf; }
     .contact-photo { border: 9px solid var(--paper); outline: 1px solid rgba(52, 57, 74, .35); box-shadow: 10px 12px 0 rgba(52, 57, 74, .12); border-radius: 3px; }
 
     .strip-grid { position: relative; z-index: 1; }
     /* hand-drawn ink doodles */
     .doodle { position: absolute; z-index: 1; pointer-events: none; fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; opacity: .7; }
-    .doodle .fill-rose { fill: rgba(242,178,196, .55); stroke: none; }
-    .doodle .fill-butter { fill: rgba(247,205,218, .6); stroke: none; }
-    .doodle .fill-sky { fill: rgba(176,207,238, .55); stroke: none; }
+    .doodle .fill-rose { fill: rgba(245,170,188, .55); stroke: none; }
+    .doodle .fill-butter { fill: rgba(249,200,212, .6); stroke: none; }
+    .doodle .fill-sky { fill: rgba(150,194,236, .55); stroke: none; }
     @keyframes bob { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-8px) rotate(2deg); } }
     .doodle.bob { animation: bob 6s ease-in-out infinite; }
     @media (max-width: 760px) { .doodle.hide-sm { display: none; } }
@@ -824,8 +829,8 @@
   </section>
 
   <section class="scene" id="journey">
-    <div class="wash" style="width:620px;height:520px;right:-180px;top:40px;background:radial-gradient(circle, rgba(176,207,238,.65), transparent 70%)"></div>
-    <div class="wash" style="width:420px;height:380px;left:-160px;bottom:10%;background:radial-gradient(circle, rgba(196,218,244,.6), transparent 70%)"></div>
+    <div class="wash" style="width:620px;height:520px;right:-180px;top:40px;background:radial-gradient(circle, rgba(150,194,236,.65), transparent 70%)"></div>
+    <div class="wash" style="width:420px;height:380px;left:-160px;bottom:10%;background:radial-gradient(circle, rgba(172,206,241,.6), transparent 70%)"></div>
     <svg class="doodle bob hide-sm" style="right:6%;top:70px;width:110px;animation-delay:-4s" viewBox="0 0 120 100" aria-hidden="true"><path class="fill-sky" d="M10 82c20 6 80 6 100 0"/><path d="M8 80c22 8 82 8 104 0M22 72h76l-10 10H32z"/><path style="fill:#fbf6ea;stroke:none" d="M58 10v60H24z"/><path d="M58 10v60H24zM62 22l30 48H62z"/><path class="fill-rose" d="M62 22l30 48H62z"/><path d="M58 10l10 4-10 4"/></svg>
     <div class="inner">
       <div class="heading reveal"><h2>my <em>journey</em></h2></div>
@@ -836,8 +841,8 @@
   </section>
 
   <section class="scene" id="loves">
-    <div class="wash" style="width:640px;height:520px;left:-200px;top:0;background:radial-gradient(circle, rgba(242,178,196,.55), transparent 70%)"></div>
-    <div class="wash" style="width:520px;height:460px;right:-160px;bottom:5%;background:radial-gradient(circle, rgba(247,205,218,.6), transparent 70%)"></div>
+    <div class="wash" style="width:640px;height:520px;left:-200px;top:0;background:radial-gradient(circle, rgba(245,170,188,.55), transparent 70%)"></div>
+    <div class="wash" style="width:520px;height:460px;right:-160px;bottom:5%;background:radial-gradient(circle, rgba(249,200,212,.6), transparent 70%)"></div>
     <div class="love-title" aria-hidden="true"><div class="cs-text" id="loveTitle"><span class="cs-l">things i</span><span class="cs-r"><em>love</em></span></div></div>
     <div class="inner">
       <h2 class="sr-only">things i love</h2>
@@ -849,7 +854,7 @@
   </section>
 
   <section class="scene" id="photos">
-    <div class="wash" style="width:600px;height:500px;right:-200px;top:0;background:radial-gradient(circle, rgba(196,218,244,.6), transparent 70%)"></div>
+    <div class="wash" style="width:600px;height:500px;right:-200px;top:0;background:radial-gradient(circle, rgba(172,206,241,.6), transparent 70%)"></div>
     <svg class="doodle bob hide-sm" style="left:3%;top:60px;width:84px;animation-delay:-1s" viewBox="0 0 100 100" aria-hidden="true"><path class="fill-butter" d="M22 40h48l-6 42H28z"/><path d="M22 40h48l-6 42H28zM70 50c12 0 14 18 0 18"/><path d="M36 30c-4-6 4-8 0-14M50 30c-4-6 4-8 0-14"/><path d="M16 88h62"/></svg>
     <div class="inner">
       <div class="heading reveal"><h2>my camera <em>roll</em></h2></div>
@@ -953,7 +958,7 @@
     </div>
   </div>
 
-  <script src="content.js?v=20261117b"></script>
+  <script src="content.js?v=20261117e"></script>
   <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
   <script>
     const S = window.SITE;
@@ -986,9 +991,9 @@
         ${textBlock("", S.heroLine)}
         <div class="booth">${card(back, "back", "")}${card(front, "", "")}
         </div></div>
-        <div class="wash" style="width:520px;height:420px;left:-140px;top:8%;background:radial-gradient(circle, rgba(247,205,218,.75), transparent 70%)"></div>
-        <div class="wash" style="width:460px;height:400px;right:-120px;bottom:-60px;background:radial-gradient(circle, rgba(242,178,196,.6), transparent 70%)"></div>
-        <div class="wash" style="width:380px;height:320px;right:22%;top:-80px;background:radial-gradient(circle, rgba(176,207,238,.6), transparent 70%)"></div>
+        <div class="wash" style="width:520px;height:420px;left:-140px;top:8%;background:radial-gradient(circle, rgba(249,200,212,.75), transparent 70%)"></div>
+        <div class="wash" style="width:460px;height:400px;right:-120px;bottom:-60px;background:radial-gradient(circle, rgba(245,170,188,.6), transparent 70%)"></div>
+        <div class="wash" style="width:380px;height:320px;right:22%;top:-80px;background:radial-gradient(circle, rgba(150,194,236,.6), transparent 70%)"></div>
         <svg class="doodle bob hide-sm" style="right:7%;top:15%;width:92px" viewBox="0 0 100 100" aria-hidden="true"><circle class="fill-butter" cx="50" cy="50" r="22"/><circle cx="50" cy="50" r="20"/><path d="M50 14v-9M50 95v-9M14 50H5M95 50h-9M24 24l-6-6M82 82l-6-6M24 76l-6 6M82 18l-6 6"/></svg><svg class="doodle hide-sm" style="left:42%;top:16%;width:120px" viewBox="0 0 120 50" aria-hidden="true"><path d="M8 26c6-8 12-8 16 0 4-8 10-8 16 0"/><path d="M58 14c4-6 9-6 12 0 3-6 8-6 12 0"/><path d="M88 34c3-4 7-4 9 0 2-4 6-4 9 0"/></svg>`;
     }
     hero.addEventListener("click", (e) => {
@@ -1083,7 +1088,7 @@
       const m = a.match(/^(.*?),\s*(.*?)\s*\((\d{4})\)\s*$/) || [null, a, "", ""];
       const words = m[1].trim().split(" ");
       const small = words.length > 1 ? words.pop() : "";
-      const fill = ["rgba(242,178,196,.7)", "rgba(176,207,238,.75)"][i % 2];
+      const fill = ["rgba(245,170,188,.7)", "rgba(150,194,236,.75)"][i % 2];
       return `<div class="aw-row">
         <svg class="aw-ribbon" viewBox="0 0 32 40" aria-hidden="true"><path d="M10 22l-4 15 6-3 4 5 2-15M22 22l4 15-6-3-4 5-2-15" /><circle cx="16" cy="14" r="11" style="fill:${fill}" /><circle cx="16" cy="14" r="6.5" /></svg>
         <span class="aw-rank">${esc(words.join(" "))} <em>${esc(small.toLowerCase())}</em></span>
@@ -1133,13 +1138,14 @@
 
     /* ================= scroll-driven world ================= */
     const skyStops = [
-      [0.00, [251, 248, 250]],  // white with a blush of pink
-      [0.20, [247, 249, 254]],  // icy blue-white
-      [0.40, [253, 244, 247]],  // light pink
-      [0.60, [245, 249, 254]],  // light blue
-      [0.80, [252, 245, 249]],  // pink-white
-      [1.00, [246, 249, 254]],  // pale blue
+      [0.00, [249, 243, 247]],  // blush white
+      [0.18, [229, 239, 251]],  // powder blue
+      [0.38, [252, 237, 240]],  // blush pink
+      [0.58, [227, 238, 250]],  // sky blue
+      [0.78, [251, 238, 242]],  // rosy white
+      [1.00, [230, 240, 251]],  // water blue
     ];
+
 
 
     function skyAt(p) {
